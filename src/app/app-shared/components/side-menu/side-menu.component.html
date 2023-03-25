@@ -1,0 +1,43 @@
+<ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+  <!-- Logo and collapse button -->
+  <li (click)="toggleCollapsed()"
+      [ngClass]="{'collapsed-menu-icon': isCollapsed, 'non-collapsed-menu-icon': !isCollapsed}"
+      style="line-height: 40px" class="my-0 mr-1">
+    <nz-row style="height: 38px; margin-bottom: 13px" nzAlign="middle">
+      <nz-col nzSpan="6">
+        <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+           [style.color]="isCollapsed && isSmallScreen ? 'black' : 'white'"></i>
+      </nz-col>
+      <nz-col nzSpan="17" style="text-align: right">
+        <img *ngIf="!isCollapsed"
+             alt="logo" class="ml-2" nz-image [nzSrc]="'assets/icon/logo.svg'" height="30px" [nzDisablePreview]="true">
+      </nz-col>
+    </nz-row>
+  </li>
+
+  <!-- Top level menu items -->
+  <li nz-menu-divider *ngIf="!isSmallScreen || !isCollapsed"></li>
+  <ng-container>
+    <li nz-menu-item *ngIf="!isSmallScreen || !isCollapsed">
+      <span nz-row nzJustify="start" nzAlign="middle">
+        <nz-col nzSpan="3" *ngIf="!isCollapsed || !isSmallScreen">
+          <span nz-icon nzType="file"></span>
+            <span>File</span>
+        </nz-col>
+        <span nz-col nzSpan="12" *ngIf="!isCollapsed"></span>
+      </span>
+    </li>
+    <li nz-menu-item *ngIf="!isSmallScreen || !isCollapsed">
+      <span nz-row nzJustify="start" nzAlign="middle">
+        <nz-col nzSpan="3" *ngIf="!isCollapsed || !isSmallScreen">
+          <span nz-icon nzType="bell"></span>
+            <span>Bell</span>
+        </nz-col>
+        <span nz-col nzSpan="12" *ngIf="!isCollapsed"></span>
+      </span>
+    </li>
+  </ng-container>
+</ul>
+
+
+

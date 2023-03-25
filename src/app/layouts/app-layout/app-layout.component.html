@@ -1,0 +1,20 @@
+<button class="button-invisible" (click)="isCollapsed = !isCollapsed"></button>
+<nz-layout [dir]="'ltr'" class="w-100 h-100">
+  <nz-sider class="pt-2" [class.menu-collapsed]="isCollapsed" nzCollapsible nzWidth="180px" [nzCollapsedWidth]="0"
+            [(nzCollapsed)]="isCollapsed">
+    <app-side-menu [(isCollapsed)]="isCollapsed"></app-side-menu>
+  </nz-sider>
+  <nz-layout>
+    <nz-header class="p-0" style="height: auto !important;">
+      <nz-row class="bg-white pr-4 w-100">
+        <nz-col nzSpan="24">
+          <app-header class="h-100"></app-header>
+        </nz-col>
+      </nz-row>
+    </nz-header>
+    <nz-content class="mh-100vh w-100 px-4 py-3">
+      <router-outlet></router-outlet>
+    </nz-content>
+    <div class="backdrop"></div>
+  </nz-layout>
+</nz-layout>

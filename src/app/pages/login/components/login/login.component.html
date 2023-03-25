@@ -1,0 +1,38 @@
+<div class="login-wrapper">
+  <div class="login-box">
+    <div class="logo-wrapper">
+      <img alt="logo" nz-image [nzSrc]="'assets/icon/logo.svg'" [nzDisablePreview]="true">
+    </div>
+    <div class="form-wrapper">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h5>LOGIN</h5>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="user">
+              <input nz-input formControlName="email" placeholder="Email"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock">
+              <input nz-input formControlName="password" type="password" placeholder="Password"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-col nzSpan="24">
+              <button nz-button nzType="primary" [disabled]="loginForm.invalid" style="width: 100%;">Login</button>
+            </nz-col>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <b style="color:red" *ngIf="error" class="error">
+            An error has happened while signing in.
+          </b>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header-trigger {
+  height: 64px;
+  padding: 20px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all .3s, padding 0s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.button-invisible {
+  position: fixed;
+  z-index: 1;
+  margin-top: 23px;
+  margin-left: 29px;
+  height: 12px;
+  background: transparent;
+  border: none;
+}
+
+@media (max-width: 765px) {
+  nz-sider {
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+  }
+}
+
+@media (min-width: 765px) {
+  .menu-collapsed {
+    min-width: 80px !important;
+  }
+}
+
+@media (max-width: 765px) {
+  .menu-collapsed {
+    z-index: 0 !important;
+  }
+}
+
+.site-footer {
+  height: 50px;
+  background-color: white;
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid black;
+  padding: 0;
+}
+
+:host ::ng-deep .ant-layout-sider-children {
+  width: 180px !important;
+}
+
+
+

@@ -1,0 +1,31 @@
+<nz-row nzAlign="middle" nzJustify="start" class="mt-2">
+  <nz-col [nzXXl]="2" [nzXl]="3" [nzLg]="4" [nzMd]="5" [nzSm]="10" [nzXs]="10"
+          [nzOffset]="isXsScreen || isSmScreen ? 2 : 0">
+    <nz-row nzJustify="center" nzAlign="middle">
+      <div class="text-secondary font-size-md font-weight-bold pb-1">SCRYFALL APP</div>
+    </nz-row>
+  </nz-col>
+
+  <nz-col [nzXXl]="22" [nzXl]="21" [nzLg]="20" [nzMd]="18" [nzSm]="12" [nzXs]="12">
+    <nz-row nzJustify="end" nzAlign="middle" class="pb-1 no-wrap">
+
+      <a nz-dropdown [nzDropdownMenu]="menu" class="font-weight-bold text-secondary">
+        <span *ngIf="!(isXsScreen || isSmScreen)">
+          Welcome, {{user}}
+        </span>
+        <i nz-icon nzType="down"></i>
+      </a>
+
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li *ngIf="isXsScreen && isSmScreen" nz-menu-item [nzSelected]="false" style="pointer-events: none">
+          <li nz-menu-item (click)="logout()"><i style="margin-right: 8px" nz-icon nzType="poweroff"></i>Logout
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </nz-row>
+  </nz-col>
+</nz-row>
+
+
+
