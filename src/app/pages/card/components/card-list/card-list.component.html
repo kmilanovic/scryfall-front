@@ -1,0 +1,28 @@
+<nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton" class="searchInput mt-2">
+  <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="searchTerm" (keyup.enter)="searchCards()"/>
+</nz-input-group>
+<ng-template #suffixButton>
+  <button nz-button nzType="primary" nzSize="large" nzSearch (click)="searchCards()">Search</button>
+</ng-template>
+
+<nz-spin class="mt-4" [nzSpinning]="showTableLoading">
+  <nz-table
+    *ngIf="showTable"
+    #rowSelectionTable
+    nzShowSizeChanger
+    [nzData]="cardList"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Preview</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let card of rowSelectionTable.data">
+      <td><a [routerLink]="card.id">{{ card.name }}</a></td>
+      <td><img alt="card" [nzSrc]="card.image_uris.normal" nz-image style="height: 40px"></td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-spin>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DASHBOARD_PATH, LOGIN_PATH } from "./app-core/globals/route.properties";
+import { CARD_LIST_PATH, LOGIN_PATH } from "./app-core/globals/route.properties";
 import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.component";
 import { AppLayoutComponent } from "./layouts/app-layout/app-layout.component";
 import { AuthGuard } from "./app-core/guards/auth.guard";
@@ -22,10 +22,10 @@ const routes: Routes = [
     path: '',
     component: AppLayoutComponent,
     children: [
-      {path: '', pathMatch: 'full', redirectTo: DASHBOARD_PATH},
+      {path: '', pathMatch: 'full', redirectTo: CARD_LIST_PATH},
       {
-        path: DASHBOARD_PATH,
-        loadChildren: () => import('./pages/dashboard/dashboard.module').then((mod) => mod.DashboardModule),
+        path: CARD_LIST_PATH,
+        loadChildren: () => import('./pages/card/card.module').then((mod) => mod.CardModule),
         canActivate: [AuthGuard]
       }
     ]

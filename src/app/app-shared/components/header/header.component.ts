@@ -13,7 +13,7 @@ export class HeaderComponent {
   isXsScreen = window.innerWidth < 576;
   isSmScreen = window.innerWidth >= 576 && window.innerWidth < 768;
 
-  user = sessionStorage.getItem('email')
+  user = localStorage.getItem('email');
 
   constructor(
     private router: Router,

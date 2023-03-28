@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs";
+import { Observable } from "rxjs";
+import { UserModel } from "../../pages/login/model/dto/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,18 @@ export class AuthProvider {
 
   }
 
-  login(email: string, password: any) {
-    return this.http.post<any>("http://localhost:8080/api/auth/login", {email, password}).pipe(
-      map(userData => {
-        sessionStorage.setItem("email", email);
-        let jwtToken = "Bearer " + userData.token;
-        sessionStorage.setItem("jwtToken", jwtToken);
-        return userData;
-      })
-    )
+  login(email: string, password: any): Observable<UserModel> {
+    return this.http.post<any>("http://localhost:8080/api/auth/login", {email, password});
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem("email");
-    let jwtToken = sessionStorage.getItem("jwtToken")
-    console.log(!(user === null && jwtToken === null));
-    return !(user === null && jwtToken === null);
+    let jwtToken = localStorage.getItem("token")
+    console.log(!(jwtToken === null));
+    return !(jwtToken === null);
   }
 
   logout() {
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('jwtToken');
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
   }
 }

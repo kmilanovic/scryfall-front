@@ -17,6 +17,7 @@ import { NzGridModule } from "ng-zorro-antd/grid";
 import { LoginModule } from "./pages/login/login.module";
 import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.component";
 import { AuthInterceptor } from "./app-core/util/auth-interceptor";
+import { en_US, NZ_I18N } from "ng-zorro-antd/i18n";
 
 registerLocaleData(en);
 
@@ -40,6 +41,7 @@ registerLocaleData(en);
     LoginModule
   ],
   providers: [
+    {provide: NZ_I18N, useValue: en_US},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
