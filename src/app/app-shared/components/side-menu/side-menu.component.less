@@ -1,6 +1,6 @@
 @import "../../../../styles.less";
 
-.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+.ant-menu.ant-menu-dark .ant-menu-item-selected .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
   background-color: @secondary-color;
 }
 
@@ -20,5 +20,6 @@ li {
   outline: none;
 }
 
-
-
+:host ::ng-deep .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  background-color: @secondary-color;
+}

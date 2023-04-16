@@ -21,9 +21,6 @@ export class SideMenuComponent {
     this.isSmallScreen = (event.target as Window).innerWidth <= 765;
   }
 
-  trackByLink(index: number, item: any): string {
-    return item.routerLink;
-  }
 
   toggleCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;

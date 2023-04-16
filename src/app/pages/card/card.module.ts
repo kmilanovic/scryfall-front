@@ -15,6 +15,10 @@ import { CardDetailsComponent } from './components/card-details/card-details.com
 import { NzImageModule } from "ng-zorro-antd/image";
 import { NzCardModule } from "ng-zorro-antd/card";
 import { NzGridModule } from "ng-zorro-antd/grid";
+import { NzMenuModule } from "ng-zorro-antd/menu";
+import { NzDropDownModule } from "ng-zorro-antd/dropdown";
+import { NzTagModule } from "ng-zorro-antd/tag";
+import {NzModalModule, NzModalService} from "ng-zorro-antd/modal";
 
 
 @NgModule({
@@ -36,6 +40,10 @@ import { NzGridModule } from "ng-zorro-antd/grid";
     NzImageModule,
     NzCardModule,
     NzGridModule,
+    NzMenuModule,
+    NzDropDownModule,
+    NzTagModule,
+    NzModalModule
   ]
 })
 export class CardModule {

@@ -1,13 +1,11 @@
-<nz-row nzJustify="center" class="px-4 py-3">
+<nz-row nzJustify="center" class="px-4 py-3" *ngIf="card">
   <nz-col nzSpan="24" class="h-100">
-
     <nz-row>
+
       <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="8" [nzXXl]="8" class="mt-2"
               style="display:inline-flex; align-self: stretch">
-        <nz-card class="w-100">
-
+        <nz-card class="w-100" style="display: flex; justify-content: center;" *ngIf="card">
           <img [src]="card.image_uris.normal" height="500px">
-
         </nz-card>
       </nz-col>
 
@@ -15,17 +13,54 @@
               style="display:inline-flex; align-self: stretch">
         <nz-card class="w-100">
           <nz-row>
-            <span class="font-size-sm text-info mt-3">
+            <span class="font-size-sm text-muted">
+              NAME
+            </span>
+          </nz-row>
+          <nz-row>
+            <span class="font-size-sm text-info">
               {{card.name}}
             </span>
           </nz-row>
           <nz-divider></nz-divider>
           <nz-row>
-            <span class="font-size-sm">
+            <span class="font-size-sm text-muted">
+              TYPE
+            </span>
+          </nz-row>
+          <nz-row>
+            <span class="font-size-sm text-info">
               {{card.type_line}}
             </span>
           </nz-row>
           <nz-divider></nz-divider>
+          <nz-row>
+            <span class="font-size-sm text-muted">
+              ORACLE
+            </span>
+          </nz-row>
+          <nz-row>
+            <span class="font-size-sm text-info">
+              {{card.oracle_text}}
+            </span>
+          </nz-row>
+          <nz-divider></nz-divider>
+          <nz-row *ngIf=" card.rulings.length> 0">
+            <span class="font-size-sm text-muted">
+              RULINGS
+            </span>
+          </nz-row>
+          <nz-row *ngIf=" card.rulings.length> 0">
+            <span class="font-size-sm text-info" *ngFor="let ruling of card.rulings">
+              {{ruling.comment}}
+            </span>
+          </nz-row>
+          <nz-divider *ngIf="card.rulings.length > 0"></nz-divider>
+          <nz-row *ngIf="card.power">
+            <span class="font-size-sm text-muted">
+              POWER
+            </span>
+          </nz-row>
           <nz-row *ngIf="card.power">
             <span class="font-size-sm text-info mt-3">
              {{card.power}} / {{card.toughness}}
@@ -33,137 +68,126 @@
           </nz-row>
           <nz-divider *ngIf="card.power"></nz-divider>
           <nz-row>
+            <span class="font-size-sm text-muted">
+              LEGALITIES
+            </span>
+          </nz-row>
+          <nz-row>
             <div style="display:flex; flex-wrap: wrap">
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.standard === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.standard}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Standard</span>
+                  <nz-tag [nzColor]="card.legalities.standard === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Standard
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.historic === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.historic}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Historic</span>
+                  <nz-tag [nzColor]="card.legalities.historic === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Historic
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.pioneer === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.pioneer}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Pioneer</span>
+                  <nz-tag [nzColor]="card.legalities.pioneer === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Pioneer
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.modern === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.modern}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Modern</span>
+                  <nz-tag [nzColor]="card.legalities.modern === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Modern
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.legacy === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.legacy}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Legacy</span>
+                  <nz-tag [nzColor]="card.legalities.legacy === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Legacy
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.alchemy === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.alchemy}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Alchemy</span>
+                  <nz-tag [nzColor]="card.legalities.alchemy === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Alchemy
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.explorer === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.explorer}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Explorer</span>
+                  <nz-tag [nzColor]="card.legalities.explorer === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Explorer
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.brawl === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.brawl}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Brawl</span>
+                  <nz-tag [nzColor]="card.legalities.brawl === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">Brawl
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.vintage === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.vintage}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Vintage</span>
+                  <nz-tag [nzColor]="card.legalities.vintage === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Vintage
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.pauper === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.pauper}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Pauper</span>
+                  <nz-tag [nzColor]="card.legalities.pauper === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Pauper
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.commander === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.commander}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Commander</span>
+                  <nz-tag [nzColor]="card.legalities.commander === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">
+                    Commander
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.penny === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.penny}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Penny</span>
+                  <nz-tag [nzColor]="card.legalities.penny === 'legal' ? '#87d068' : '#848484'" nzMode="default"
+                          style="width: 80px; border-radius: 5px;">Penny
+                  </nz-tag>
                 </div>
               </div>
 
-              <div style="width: 80px; margin: 5px;">
-                <div
-                  style="text-align: center; border: 1px solid #ccc; background-color: {{card.legalities.oathbreaker === 'legal' ? 'green' : '#eee'}};">
-                  <span style="font-size: 10px;">{{card.legalities.oathbreaker}}</span>
-                </div>
+              <div style="width: 80px; margin: 3px 5px 5px 0px">
                 <div style="text-align: center;">
-                  <span style="font-size: 12px; font-weight: bold;">Oathbreaker</span>
+                  <nz-tag [nzColor]="card.legalities.oathbreaker === 'legal' ? '#87d068' : '#848484'"
+                          nzMode="default" style="width: 80px; border-radius: 5px;">
+                    Oathbreaker
+                  </nz-tag>
                 </div>
               </div>
-
             </div>
           </nz-row>
         </nz-card>
@@ -178,33 +202,33 @@
               BUY THIS CARD
             </span>
           </nz-row>
-
           <nz-divider></nz-divider>
 
           <nz-row>
-              <span class="font-size-sm text-info mt-3 px-5"
-                    style="border: 1px solid green; border-radius: 2px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
+              <span class="font-size-sm text-info mt-3 px-5 buy-button-tcg"
+                    style="border: 1px solid #87d068; border-radius: 5px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
                 <a href="{{card.purchase_uris.tcgplayer}}" target="_blank">TCGplayer</a>
               </span>
           </nz-row>
 
           <nz-row>
-            <span class="font-size-sm text-info mt-3 px-5"
-                  style="border: 1px solid purple; border-radius: 2px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
+            <span class="font-size-sm text-info mt-3 px-5 buy-button-cm"
+                  style="border: 1px solid purple; border-radius: 5px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
               <a href=" {{card.purchase_uris.cardmarket}}" target="_blank">Cardmarket</a>
             </span>
           </nz-row>
 
           <nz-row>
-            <span class="font-size-sm text-info mt-3 px-5"
-                  style="border: 1px solid orange; border-radius: 2px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
+            <span class="font-size-sm text-info mt-3 px-5 buy-button-ch"
+                  style="border: 1px solid orange; border-radius: 5px; display: inline-flex; justify-content: center; width: 50%; align-items: center">
               <a href="{{card.purchase_uris.cardhoarder}}" target="_blank">Cardhoarder</a>
             </span>
           </nz-row>
+
         </nz-card>
       </nz-col>
-    </nz-row>
 
+    </nz-row>
   </nz-col>
 </nz-row>
 

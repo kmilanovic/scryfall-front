@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../../app-core/providers/auth.provider";
 import { Router } from "@angular/router";
+import { UserModel } from "../../model/dto/user.model";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
-  invalidLogin = false;
+  user: UserModel = {email: '', token: '', id: 0};
 
   @Input() error!: string;
 
@@ -48,9 +49,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authProvider.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      (response) => {
+      (response: UserModel) => {
+        this.user.email = response.email;
+        localStorage.setItem('userId', String(response.id));
         localStorage.setItem('token', response.token);
-        localStorage.setItem('email', response.email)
+        localStorage.setItem('email', response.email);
         this.router.navigate(['/card-list']);
       },
       (error) => {

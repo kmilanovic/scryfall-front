@@ -16,12 +16,33 @@
     <tr>
       <th>Name</th>
       <th>Preview</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let card of rowSelectionTable.data">
       <td><a [routerLink]="card.id">{{ card.name }}</a></td>
-      <td><img alt="card" [nzSrc]="card.image_uris.normal" nz-image style="height: 40px"></td>
+      <td>
+        <ng-container *ngIf="card?.image_uris?.normal">
+          <img alt="card" [nzSrc]="card?.image_uris?.normal || '/'" nz-image style="height: 40px">
+        </ng-container>
+        <ng-container *ngIf="!card?.image_uris?.normal">/</ng-container>
+      <td>
+        <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+          <i nz-icon nzType="menu"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item [nzSelected]="false" style="pointer-events: none"></li>
+            <a [routerLink]="card.id">
+              <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="expand"></i>Details</li>
+            </a>
+            <a (click)="openModal()">
+              <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="plus-circle"></i>Add to set</li>
+            </a>
+          </ul>
+        </nz-dropdown-menu>
+      </td>
     </tr>
     </tbody>
   </nz-table>

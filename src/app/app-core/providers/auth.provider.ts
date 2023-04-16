@@ -14,7 +14,7 @@ export class AuthProvider {
   }
 
   login(email: string, password: any): Observable<UserModel> {
-    return this.http.post<any>("http://localhost:8080/api/auth/login", {email, password});
+    return this.http.post<any>("http://localhost:4200/api/auth/login", {email, password});
   }
 
   isUserLoggedIn() {

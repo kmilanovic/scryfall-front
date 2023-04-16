@@ -31,6 +31,5 @@ export class HeaderComponent {
   logout() {
     this.authProvider.logout();
     this.router.navigate(['/login']);
-    console.log("clicked")
   }
 }

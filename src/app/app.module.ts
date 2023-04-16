@@ -16,8 +16,10 @@ import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { NzGridModule } from "ng-zorro-antd/grid";
 import { LoginModule } from "./pages/login/login.module";
 import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.component";
-import { AuthInterceptor } from "./app-core/util/auth-interceptor";
+import { AuthInterceptor } from "./app-core/util/auth.interceptor";
 import { en_US, NZ_I18N } from "ng-zorro-antd/i18n";
+import {AppCoreModule} from "./app-core/app-core.module";
+import {NzModalRef} from "ng-zorro-antd/modal";
 
 registerLocaleData(en);
 
@@ -38,11 +40,12 @@ registerLocaleData(en);
     NzMenuModule,
     AppSharedModule,
     NzGridModule,
-    LoginModule
+    LoginModule,
+    AppCoreModule
   ],
   providers: [
-    {provide: NZ_I18N, useValue: en_US},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -65,6 +65,15 @@ export interface CardModel {
   prices: Prices;
   related_uris: RelatedUris;
   purchase_uris: PurchaseUris;
+  rulings: RulingModel[];
+}
+
+export interface RulingModel {
+  object: string;
+  oracle_id: string;
+  source: string;
+  published_at: Date;
+  comment: string;
 }
 
 export interface AllPart {

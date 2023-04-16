@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { CardProvider } from "../../../../app-core/providers/card.provider";
 import { CardModel } from "../../model/dto/card.model";
+import { forkJoin, switchMap } from "rxjs";
 
 @Component({
   selector: 'app-card-details',
@@ -9,7 +10,7 @@ import { CardModel } from "../../model/dto/card.model";
   styleUrls: ['./card-details.component.less']
 })
 export class CardDetailsComponent implements OnInit {
-  card!: CardModel
+  card!: CardModel;
 
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider) {
@@ -20,12 +21,20 @@ export class CardDetailsComponent implements OnInit {
   }
 
   fetchCardDetails(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      this.cardProvider.getCardById(id)
-        .subscribe(card => {
-          this.card = card;
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        const id = params.get('id');
+        if (!id) {
+          throw new Error('ID parameter is missing');
+        }
+        return forkJoin({
+          card: this.cardProvider.getCardById(id),
+          rulings: this.cardProvider.getCardRullings(id),
         });
+      })
+    ).subscribe(data => {
+      this.card = data.card;
+      this.card.rulings = data.rulings;
     });
   }
 }

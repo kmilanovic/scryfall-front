@@ -1,4 +1,4 @@
-<ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+<ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed" nzMode="inline">
   <!-- Logo and collapse button -->
   <li (click)="toggleCollapsed()"
       [ngClass]="{'collapsed-menu-icon': isCollapsed, 'non-collapsed-menu-icon': !isCollapsed}"
@@ -18,23 +18,25 @@
   <!-- Top level menu items -->
   <li nz-menu-divider *ngIf="!isSmallScreen || !isCollapsed"></li>
   <ng-container>
-    <li nz-menu-item *ngIf="!isSmallScreen || !isCollapsed">
-      <span nz-row nzJustify="start" nzAlign="middle">
-        <nz-col nzSpan="3" *ngIf="!isCollapsed || !isSmallScreen">
-          <span nz-icon nzType="file"></span>
-            <span>File</span>
-        </nz-col>
-        <span nz-col nzSpan="12" *ngIf="!isCollapsed"></span>
-      </span>
+    <li nz-submenu nzTitle="Sets" nzIcon="group" *ngIf="!isSmallScreen || !isCollapsed">
+      <ul *ngIf="!isSmallScreen || !isCollapsed">
+        <li nz-menu-item>
+          <span nz-icon nzType="search"></span>
+          <span>Search sets</span></li>
+        <li nz-menu-item>
+          <span nz-icon nzType="unordered-list"></span>
+          <span>My sets</span></li>
+      </ul>
     </li>
+
     <li nz-menu-item *ngIf="!isSmallScreen || !isCollapsed">
-      <span nz-row nzJustify="start" nzAlign="middle">
-        <nz-col nzSpan="3" *ngIf="!isCollapsed || !isSmallScreen">
-          <span nz-icon nzType="bell"></span>
-            <span>Bell</span>
-        </nz-col>
-        <span nz-col nzSpan="12" *ngIf="!isCollapsed"></span>
-      </span>
+    <span nz-row nzJustify="start" nzAlign="middle">
+      <nz-col nzSpan="3" *ngIf="!isCollapsed || !isSmallScreen">
+        <span nz-icon nzType="bell"></span>
+        <span>Bell</span>
+      </nz-col>
+      <span nz-col nzSpan="12" *ngIf="!isCollapsed"></span>
+    </span>
     </li>
   </ng-container>
 </ul>
