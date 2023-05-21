@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { CardProvider } from "../../../../app-core/providers/card.provider";
 import { CardModel } from "../../model/dto/card.model";
 import { forkJoin, switchMap } from "rxjs";
+import {ByIdCommand} from "../../model/command/by-id.command";
 
 @Component({
   selector: 'app-card-details',
@@ -23,13 +24,14 @@ export class CardDetailsComponent implements OnInit {
   fetchCardDetails(): void {
     this.route.paramMap.pipe(
       switchMap(params => {
-        const id = params.get('id');
-        if (!id) {
+        const byIdCommand: ByIdCommand = new ByIdCommand()
+        byIdCommand.id = params.get('id');
+        if (!byIdCommand.id) {
           throw new Error('ID parameter is missing');
         }
         return forkJoin({
-          card: this.cardProvider.getCardById(id),
-          rulings: this.cardProvider.getCardRullings(id),
+          card: this.cardProvider.getCardById(byIdCommand),
+          rulings: this.cardProvider.getCardRulings(byIdCommand),
         });
       })
     ).subscribe(data => {

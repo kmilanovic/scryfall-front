@@ -1,5 +1,5 @@
 <nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton" class="searchInput mt-2">
-  <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="searchTerm" (keyup.enter)="searchCards()"/>
+  <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="term" (keyup.enter)="searchCards()"/>
 </nz-input-group>
 <ng-template #suffixButton>
   <button nz-button nzType="primary" nzSize="large" nzSearch (click)="searchCards()">Search</button>

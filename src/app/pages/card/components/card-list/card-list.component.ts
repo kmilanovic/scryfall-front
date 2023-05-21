@@ -4,6 +4,7 @@ import { CardProvider } from "../../../../app-core/providers/card.provider";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {SetProvider} from "../../../../app-core/providers/sets.provider";
 import {SetModel} from "../../../set/model/dto/set.model";
+import {SearchCardCommand} from "../../model/command/search-card.command";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,7 @@ export class CardListComponent implements OnInit {
   itemsPerPage = 10;
   listOfCurrentPageData: readonly CardModel[] = [];
   showTableLoading = false;
-  searchTerm: string = '';
+  term: string = '';
   setList!: SetModel[];
   nzModalRef!: NzModalRef;
 
@@ -38,8 +39,10 @@ export class CardListComponent implements OnInit {
   }
 
   searchCards() {
+    const searchCardCommand: SearchCardCommand = new SearchCardCommand();
+    searchCardCommand.term = this.term;
     this.showTableLoading = true;
-    this.cardProvider.searchCards(this.searchTerm).subscribe((
+    this.cardProvider.searchCards(searchCardCommand).subscribe((
       res: any) => {
         this.cardList = res.data;
         this.showTable = true;
