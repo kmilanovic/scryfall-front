@@ -18,7 +18,7 @@ import { NzGridModule } from "ng-zorro-antd/grid";
 import { NzMenuModule } from "ng-zorro-antd/menu";
 import { NzDropDownModule } from "ng-zorro-antd/dropdown";
 import { NzTagModule } from "ng-zorro-antd/tag";
-import {NzModalModule, NzModalService} from "ng-zorro-antd/modal";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 
 @NgModule({

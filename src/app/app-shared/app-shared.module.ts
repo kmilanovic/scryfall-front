@@ -10,7 +10,7 @@ import { NzImageModule } from "ng-zorro-antd/image";
 
 const COMPONENTS = [
   HeaderComponent,
-  SideMenuComponent
+  SideMenuComponent,
 ]
 
 @NgModule({

@@ -19,7 +19,6 @@ import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.compon
 import { AuthInterceptor } from "./app-core/util/auth.interceptor";
 import { en_US, NZ_I18N } from "ng-zorro-antd/i18n";
 import {AppCoreModule} from "./app-core/app-core.module";
-import {NzModalRef} from "ng-zorro-antd/modal";
 
 registerLocaleData(en);
 
@@ -44,8 +43,8 @@ registerLocaleData(en);
     AppCoreModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: NZ_I18N, useValue: en_US},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

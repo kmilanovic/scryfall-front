@@ -32,4 +32,8 @@ export class HeaderComponent {
     this.authProvider.logout();
     this.router.navigate(['/login']);
   }
+
+  navigateToHome() {
+    this.router.navigate(['/card-list']);
+  }
 }

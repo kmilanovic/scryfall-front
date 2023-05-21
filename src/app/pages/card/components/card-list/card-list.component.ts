@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CardModel } from "../../model/dto/card.model";
 import { CardProvider } from "../../../../app-core/providers/card.provider";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
-import {SetProvider} from "../../../../app-core/providers/sets.provider";
+import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {SetModel} from "../../../set/model/dto/set.model";
 import {SearchCardCommand} from "../../model/command/search-card.command";
 
@@ -13,18 +13,8 @@ import {SearchCardCommand} from "../../model/command/search-card.command";
 })
 export class CardListComponent implements OnInit {
 
-  books = [
-    { id: 1, title: 'The Great Gatsby' },
-    { id: 2, title: 'To Kill a Mockingbird' },
-    { id: 3, title: '1984' },
-    { id: 4, title: 'Pride and Prejudice' },
-    { id: 5, title: 'The Catcher in the Rye' },
-  ];
-
   showTable = false;
   cardList!: CardModel[];
-  currentPage = 1;
-  itemsPerPage = 10;
   listOfCurrentPageData: readonly CardModel[] = [];
   showTableLoading = false;
   term: string = '';
@@ -46,7 +36,7 @@ export class CardListComponent implements OnInit {
       res: any) => {
         this.cardList = res.data;
         this.showTable = true;
-        this.currentPage = 1;
+        //this.currentPage = 1;
         this.showTableLoading = false;
       },
       error => console.log(error)

@@ -6,6 +6,8 @@ import { CARD_SEARCH_URL } from "../globals/global";
 import {environment} from "../../../environments/environment";
 import {ByIdCommand} from "../../pages/card/model/command/by-id.command";
 import {SearchCardCommand} from "../../pages/card/model/command/search-card.command";
+import {SetModel} from "../../pages/set/model/dto/set.model";
+import {SetCodeCommand} from "../../pages/set/model/command/set-code.command";
 
 @Injectable({providedIn: 'root'})
 export class CardProvider {
@@ -28,5 +30,9 @@ export class CardProvider {
 
   searchCards(command: SearchCardCommand): Observable<CardModel> {
     return this.http.post<CardModel>(`${this.cardUrl}search`, command);
+  }
+
+  getCardsBySet(command: SetCodeCommand): Observable<CardModel> {
+    return this.http.post<CardModel>(`${this.cardUrl}search-by-code`, command)
   }
 }

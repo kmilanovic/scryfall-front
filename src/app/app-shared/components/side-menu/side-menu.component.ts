@@ -27,4 +27,8 @@ export class SideMenuComponent {
     this.isCollapsedChange.emit(this.isCollapsed);
   }
 
+  navigateToSearchSets(): void {
+    this.router.navigate(['/set-list']);
+  }
+
 }
