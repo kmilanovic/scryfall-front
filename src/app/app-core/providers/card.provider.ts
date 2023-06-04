@@ -17,7 +17,6 @@ export class CardProvider {
   }
 
   getCardById(command: ByIdCommand): Observable<CardModel> {
-    //return this.http.get<CardModel>(`https://api.scryfall.com/cards/` + id);
     return this.http.post<CardModel>(`${this.cardUrl}get`, command)
   }
 

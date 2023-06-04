@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { CardProvider } from "../../../../app-core/providers/card.provider";
 import { CardModel } from "../../model/dto/card.model";
 import { forkJoin, switchMap } from "rxjs";
@@ -14,7 +14,8 @@ export class CardDetailsComponent implements OnInit {
   card!: CardModel;
 
   constructor(private route: ActivatedRoute,
-              private cardProvider: CardProvider) {
+              private cardProvider: CardProvider,
+              public router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,5 +39,9 @@ export class CardDetailsComponent implements OnInit {
       this.card = data.card;
       this.card.rulings = data.rulings;
     });
+  }
+
+  navigateToSetCardList(setCode: string) {
+    this.router.navigate(['/set-list', setCode])
   }
 }

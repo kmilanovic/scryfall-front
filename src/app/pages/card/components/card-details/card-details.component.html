@@ -6,6 +6,20 @@
               style="display:inline-flex; align-self: stretch">
         <nz-card class="w-100" style="display: flex; justify-content: center;" *ngIf="card">
           <img [src]="card.image_uris.normal" height="500px">
+          <nz-divider></nz-divider>
+          <nz-row>
+            <span class="font-size-sm text-muted">
+              SET
+            </span>
+          </nz-row>
+          <a (click)="navigateToSetCardList(card.set)">
+            <div style="margin-top: 30px; background-color: #401E3D; color: white; padding: 10px; height: 60px; display: flex;
+            align-items: center; border-radius: 5px;">
+              <span style="font-size: 15px; display: inline-block; margin-left: auto; margin-right: auto;">
+                {{ card.set_name }} ({{ card.set | uppercase }})
+              </span>
+            </div>
+          </a>
         </nz-card>
       </nz-col>
 
