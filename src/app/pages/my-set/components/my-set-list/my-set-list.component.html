@@ -1,0 +1,39 @@
+<nz-spin class="mt-4" [nzSpinning]="showTableLoading">
+  <nz-table
+    *ngIf="showTable"
+    #rowSelectionTable
+    nzShowSizeChanger
+    [nzData]="setList"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Preview</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let set of rowSelectionTable.data">
+      <td><a (click)="navigateToSetCardList(set.code)">{{ set.name }}</a></td>
+      <td>
+        <ng-container *ngIf="set?.icon_svg_uri">
+          <img alt="card" [nzSrc]="set?.icon_svg_uri || '/'" nz-image style="height: 40px">
+        </ng-container>
+        <ng-container *ngIf="!set?.icon_svg_uri">/</ng-container>
+      <td>
+        <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+          <i nz-icon nzType="menu"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item [nzSelected]="false" style="pointer-events: none"></li>
+            <a [routerLink]="set.code">
+              <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="expand"></i>Details</li>
+            </a>
+          </ul>
+        </nz-dropdown-menu>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-spin>

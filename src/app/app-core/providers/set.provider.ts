@@ -5,15 +5,20 @@ import { CardModel, RulingModel } from "../../pages/card/model/dto/card.model";
 import { CARD_SEARCH_URL } from "../globals/global";
 import {SetModel} from "../../pages/set/model/dto/set.model";
 import {environment} from "../../../environments/environment";
+import {MySetModel} from "../../pages/set/model/dto/my-set.model";
 
 @Injectable({providedIn: 'root'})
 export class SetProvider {
-  private cardUrl  = `${environment.apiUrl}set/`
+  private setUrl  = `${environment.apiUrl}set/`
 
   constructor(private http: HttpClient) {
   }
 
   getSets(): Observable<SetModel[]> {
-    return this.http.get<SetModel[]>(`${this.cardUrl}all-api`)
+    return this.http.get<SetModel[]>(`${this.setUrl}all-api`)
+  }
+
+  getMySets(): Observable<MySetModel[]> {
+    return this.http.get<MySetModel[]>(`${this.setUrl}all`)
   }
 }

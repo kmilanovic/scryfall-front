@@ -19,12 +19,16 @@ import { NzMenuModule } from "ng-zorro-antd/menu";
 import { NzDropDownModule } from "ng-zorro-antd/dropdown";
 import { NzTagModule } from "ng-zorro-antd/tag";
 import {NzModalModule} from "ng-zorro-antd/modal";
+import { ModalSelectComponent } from './components/modal-select/modal-select.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 @NgModule({
   declarations: [
     CardListComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
+    ModalSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,9 @@ import {NzModalModule} from "ng-zorro-antd/modal";
     NzMenuModule,
     NzDropDownModule,
     NzTagModule,
-    NzModalModule
+    NzModalModule,
+    NzSelectModule,
+    NzMessageModule
   ]
 })
 export class CardModule {

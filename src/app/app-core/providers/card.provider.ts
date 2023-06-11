@@ -8,6 +8,7 @@ import {ByIdCommand} from "../../pages/card/model/command/by-id.command";
 import {SearchCardCommand} from "../../pages/card/model/command/search-card.command";
 import {SetModel} from "../../pages/set/model/dto/set.model";
 import {SetCodeCommand} from "../../pages/set/model/command/set-code.command";
+import {SaveCardInSetCommand} from "../../pages/card/model/command/save-card-in-set.command";
 
 @Injectable({providedIn: 'root'})
 export class CardProvider {
@@ -33,5 +34,9 @@ export class CardProvider {
 
   getCardsBySet(command: SetCodeCommand): Observable<CardModel> {
     return this.http.post<CardModel>(`${this.cardUrl}search-by-code`, command)
+  }
+
+  saveCardInSet(command: SaveCardInSetCommand): Observable<void> {
+    return this.http.post<void>(`${this.cardUrl}save-in-set`, command);
   }
 }

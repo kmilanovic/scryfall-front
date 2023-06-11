@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {CARD_LIST_PATH, LOGIN_PATH, SET_CARD_LIST_PATH, SET_LIST_PATH} from "./app-core/globals/route.properties";
+import {
+  CARD_LIST_PATH,
+  LOGIN_PATH,
+  MY_SET_LIST_PATH,
+  SET_CARD_LIST_PATH,
+  SET_LIST_PATH
+} from "./app-core/globals/route.properties";
 import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.component";
 import { AppLayoutComponent } from "./layouts/app-layout/app-layout.component";
 import { AuthGuard } from "./app-core/guards/auth.guard";
@@ -36,6 +42,11 @@ const routes: Routes = [
       {
         path: SET_CARD_LIST_PATH,
         loadChildren: () => import('./pages/set/set.module').then((mod) => mod.SetModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: MY_SET_LIST_PATH,
+        loadChildren: () => import('./pages/my-set/my-set.module').then((mod) => mod.MySetModule),
         canActivate: [AuthGuard]
       }
     ]

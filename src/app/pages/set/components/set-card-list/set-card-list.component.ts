@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CardModel} from "../../../card/model/dto/card.model";
-import {SetModel} from "../../model/dto/set.model";
-import {NzModalRef} from "ng-zorro-antd/modal";
 import {forkJoin, switchMap} from "rxjs";
-import {ByIdCommand} from "../../../card/model/command/by-id.command";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SetCodeCommand} from "../../model/command/set-code.command";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
@@ -43,6 +40,8 @@ export class SetCardListComponent implements OnInit {
        this.setCardList = res.data;
        this.showTable = true;
        this.showTableLoading = false;
+
+       console.log(res)
       },
       error: (error) => {
         console.error('Error retrieving cards:', error);

@@ -31,4 +31,8 @@ export class SideMenuComponent {
     this.router.navigate(['/set-list']);
   }
 
+  navigateToMySets(): void {
+    this.router.navigate(['/my-set-list']);
+  }
+
 }

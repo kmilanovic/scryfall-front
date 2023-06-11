@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../../app-core/providers/auth.provider";
 import { Router } from "@angular/router";
 import { UserModel } from "../../model/dto/user.model";
+import {finalize, tap} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -48,18 +49,23 @@ export class LoginComponent implements OnInit {
   }*/
 
   onSubmit() {
-    this.authProvider.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      (response: UserModel) => {
-        this.user.email = response.email;
-        localStorage.setItem('userId', String(response.id));
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('email', response.email);
-        this.router.navigate(['/card-list']);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.authProvider
+      .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
+      .pipe(
+        tap((response: UserModel) => {
+          this.user.email = response.email;
+          localStorage.setItem('userId', String(response.id));
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('email', response.email);
+          this.router.navigate(['/card-list']);
+        })
+      )
+      .subscribe({
+        next: () => {},
+        error: (error) => {
+          console.log(error);
+        }
+      });
   }
 
 }

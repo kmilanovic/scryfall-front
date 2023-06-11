@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SetModel} from "../../model/dto/set.model";
 import {SetProvider} from "../../../../app-core/providers/set.provider";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({

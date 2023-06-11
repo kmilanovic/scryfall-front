@@ -5,6 +5,9 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {SetModel} from "../../../set/model/dto/set.model";
 import {SearchCardCommand} from "../../model/command/search-card.command";
+import {ModalSelectComponent} from "../modal-select/modal-select.component";
+import {MySetModel} from "../../../set/model/dto/my-set.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +22,9 @@ export class CardListComponent implements OnInit {
   showTableLoading = false;
   term: string = '';
   setList!: SetModel[];
+  mySetList!: MySetModel[];
   nzModalRef!: NzModalRef;
+  selectedSetName!: string;
 
   constructor(public cardProvider: CardProvider,
               public modal: NzModalService,
@@ -32,41 +37,37 @@ export class CardListComponent implements OnInit {
     const searchCardCommand: SearchCardCommand = new SearchCardCommand();
     searchCardCommand.term = this.term;
     this.showTableLoading = true;
-    this.cardProvider.searchCards(searchCardCommand).subscribe((
-      res: any) => {
+
+    this.cardProvider.searchCards(searchCardCommand).subscribe({
+      next: (res: any) => {
         this.cardList = res.data;
         this.showTable = true;
-        //this.currentPage = 1;
         this.showTableLoading = false;
       },
-      error => console.log(error)
-    )
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 
   onCurrentPageDataChange($event: readonly CardModel[]): void {
     this.listOfCurrentPageData = $event;
   }
 
-  private getSets(): void {
-    this.setProvider.getSets().subscribe((res: SetModel[]) => {
-      if (res) {
-        this.setList = res;
-        console.log(this.setList)
+  public openModal(cardId: string): void {
+    this.setProvider.getMySets().subscribe((sets: MySetModel[]) => {
+      if (sets && sets.length > 0) {
+        this.mySetList = sets;
+        this.nzModalRef = this.modal.create({
+          nzTitle: 'Sets',
+          nzContent: ModalSelectComponent,
+          nzComponentParams: {
+            mySetList: this.mySetList,
+            cardId: cardId
+          },
+          nzFooter: null
+        });
       }
-    })
-  }
-
-  openModal(): void {
-    this.getSets();
-    this.nzModalRef = this.modal.create({
-      nzTitle: 'Sets',
-      nzClosable: true,
-      nzContent: `
-      <ul>
-        <li *ngFor="let set of setList">{{set.name}}</li>
-      </ul>
-    `,
-      nzFooter: null,
     });
   }
 }
