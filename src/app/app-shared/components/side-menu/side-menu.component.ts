@@ -27,6 +27,10 @@ export class SideMenuComponent {
     this.isCollapsedChange.emit(this.isCollapsed);
   }
 
+  navigateToSearchCards(): void {
+    this.router.navigate(['/card-list']);
+  }
+
   navigateToSearchSets(): void {
     this.router.navigate(['/set-list']);
   }

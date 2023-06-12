@@ -17,6 +17,9 @@
 
   <!-- Top level menu items -->
   <li nz-menu-divider *ngIf="!isSmallScreen || !isCollapsed"></li>
+  <li nz-menu-item (click)="navigateToSearchCards()">
+    <span nz-icon nzType="search"></span>
+    <span>Search cards</span></li>
   <ng-container>
     <li nz-submenu nzTitle="Sets" nzIcon="group" *ngIf="!isSmallScreen || !isCollapsed">
       <ul *ngIf="!isSmallScreen || !isCollapsed">
