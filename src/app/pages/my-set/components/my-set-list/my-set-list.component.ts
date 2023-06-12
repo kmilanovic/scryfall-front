@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SetModel} from "../../../set/model/dto/set.model";
 import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {Router} from "@angular/router";
-import {MySetModule} from "../../my-set.module";
 import {MySetModel} from "../../../set/model/dto/my-set.model";
 
 @Component({
@@ -28,7 +26,8 @@ export class MySetListComponent implements OnInit {
 
   getMySets() {
     this.showTableLoading = true;
-    this.setProvider.getMySets().subscribe((res: any) => {
+    const userId = localStorage.getItem('userId');
+    this.setProvider.getMySets(Number(userId)).subscribe((res: any) => {
       this.setList = res;
       this.showTable = true;
       this.showTableLoading = false;
