@@ -4,6 +4,8 @@ import {forkJoin, switchMap} from "rxjs";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SetCodeCommand} from "../../model/command/set-code.command";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
+import {SetService} from "../../set.service";
+import {SetModel} from "../../model/dto/set.model";
 
 @Component({
   selector: 'app-set-card-list',
@@ -15,8 +17,10 @@ export class SetCardListComponent implements OnInit {
   setCardList!: CardModel[];
   listOfCurrentPageData: readonly CardModel[] = [];
   showTableLoading = false;
+  selectedSet!: SetModel | null
   constructor(private route: ActivatedRoute,
-              private cardProvider: CardProvider) { }
+              private cardProvider: CardProvider,
+              private setService: SetService) { }
 
   ngOnInit(): void {
     this.getCardsBySet();
@@ -27,7 +31,7 @@ export class SetCardListComponent implements OnInit {
   }
 
   getCardsBySet() {
-    this.showTableLoading = false;
+    this.showTableLoading = true;
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const setCodeCommand: SetCodeCommand = new SetCodeCommand();
@@ -38,10 +42,10 @@ export class SetCardListComponent implements OnInit {
     ).subscribe({
       next: (res: any) => {
        this.setCardList = res.data;
+        this.selectedSet = this.setService.getSelectedSet();
        this.showTable = true;
        this.showTableLoading = false;
 
-       console.log(res)
       },
       error: (error) => {
         console.error('Error retrieving cards:', error);

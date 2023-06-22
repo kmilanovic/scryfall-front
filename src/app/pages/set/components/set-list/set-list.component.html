@@ -1,4 +1,6 @@
-<nz-spin class="mt-4" [nzSpinning]="showTableLoading">
+<div class="spinner-container" *ngIf="showTableLoading">
+  <nz-spin></nz-spin>
+</div>
   <nz-table
     *ngIf="showTable"
     #rowSelectionTable
@@ -14,7 +16,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let set of rowSelectionTable.data">
-      <td><a (click)="navigateToSetCardList(set.code)">{{ set.name }}</a></td>
+      <td><a (click)="navigateToSetCardList(set)">{{ set.name }}</a></td>
       <td>
         <ng-container *ngIf="set?.icon_svg_uri">
           <img alt="card" [nzSrc]="set?.icon_svg_uri || '/'" nz-image style="height: 40px">
@@ -36,4 +38,3 @@
     </tr>
     </tbody>
   </nz-table>
-</nz-spin>

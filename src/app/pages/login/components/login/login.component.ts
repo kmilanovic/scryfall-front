@@ -31,23 +31,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-  /*onSubmit() {
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    this.authProvider.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe(
-      (response) => {
-        this.router.navigate(['/card-list'])
-      },
-      error => {
-        this.invalidLogin = true;
-        this.error = error.message;
-      }
-    )
-  }*/
-
   onSubmit() {
     this.authProvider
       .login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
@@ -64,6 +47,7 @@ export class LoginComponent implements OnInit {
         next: () => {},
         error: (error) => {
           console.log(error);
+          this.error = 'An error has happened while signing in.';
         }
       });
   }

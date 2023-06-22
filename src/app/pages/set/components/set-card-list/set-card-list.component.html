@@ -1,4 +1,20 @@
-<nz-spin class="mt-4" [nzSpinning]="showTableLoading">
+<div class="spinner-container" *ngIf="showTableLoading">
+  <nz-spin></nz-spin>
+</div>
+  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="8" [nzXXl]="8" class="mt-2 mb-2"
+          style="display: flex; align-self: stretch">
+    <nz-card class="w-70" style="display: flex; align-items: center;" *ngIf="selectedSet">
+      <div style="display: flex; align-items: center;">
+        <div>
+          <img alt="card" [nzSrc]="selectedSet.icon_svg_uri || '/'" nz-image style="height: 40px">
+        </div>
+        <div style="margin-left: 10px;">
+          <div>{{ selectedSet.name }}</div>
+          <div>{{ selectedSet.card_count }} cards</div>
+        </div>
+      </div>
+    </nz-card>
+  </nz-col>
   <nz-table
     *ngIf="showTable"
     #rowSelectionTable
@@ -36,4 +52,3 @@
     </tr>
     </tbody>
   </nz-table>
-</nz-spin>

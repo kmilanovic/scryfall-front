@@ -12,6 +12,7 @@ import {ByIdCommand} from "../../model/command/by-id.command";
 })
 export class CardDetailsComponent implements OnInit {
   card!: CardModel;
+  showTableLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider,
@@ -23,6 +24,7 @@ export class CardDetailsComponent implements OnInit {
   }
 
   fetchCardDetails(): void {
+    this.showTableLoading = true;
     this.route.paramMap.pipe(
       switchMap(params => {
         const byIdCommand: ByIdCommand = new ByIdCommand()
@@ -38,6 +40,7 @@ export class CardDetailsComponent implements OnInit {
     ).subscribe(data => {
       this.card = data.card;
       this.card.rulings = data.rulings;
+      this.showTableLoading = false;
     });
   }
 

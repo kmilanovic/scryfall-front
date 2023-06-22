@@ -1,4 +1,6 @@
-<nz-spin class="mt-4" [nzSpinning]="showTableLoading">
+<div class="spinner-container" *ngIf="showTableLoading">
+  <nz-spin></nz-spin>
+</div>
   <nz-table
     *ngIf="showTable"
     #rowSelectionTable
@@ -36,4 +38,3 @@
     </tr>
     </tbody>
   </nz-table>
-</nz-spin>

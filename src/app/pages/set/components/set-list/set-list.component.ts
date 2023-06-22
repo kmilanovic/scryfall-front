@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SetModel} from "../../model/dto/set.model";
 import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {Router} from "@angular/router";
+import {SetService} from "../../set.service";
 
 
 @Component({
@@ -16,7 +17,8 @@ export class SetListComponent implements OnInit {
   showTableLoading = false;
 
   constructor(public setProvider: SetProvider,
-              public router: Router) { }
+              public router: Router,
+              public setService: SetService) { }
 
   ngOnInit(): void {
     this.getSets();
@@ -30,12 +32,13 @@ export class SetListComponent implements OnInit {
     this.showTableLoading = true;
     this.setProvider.getSets().subscribe((res: any) => {
       this.setList = res.data;
-      this.showTable = true;
       this.showTableLoading = false;
+      this.showTable = true;
     })
   }
 
-  navigateToSetCardList(setCode: string) {
-    this.router.navigate(['/set-list', setCode])
+  navigateToSetCardList(set: SetModel) {
+    this.setService.setSelectedSet(set);
+    this.router.navigate(['/set-list', set.code])
   }
 }
