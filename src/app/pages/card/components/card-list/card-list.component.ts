@@ -6,7 +6,7 @@ import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {SearchCardCommand} from "../../model/command/search-card.command";
 import {ModalSelectComponent} from "../modal-select/modal-select.component";
 import {MySetModel} from "../../../set/model/dto/my-set.model";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,9 +26,21 @@ export class CardListComponent implements OnInit {
   constructor(public cardProvider: CardProvider,
               public modal: NzModalService,
               public setProvider: SetProvider,
-              public router: Router) {}
+              public router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.retrieveSearchParams();
+  }
+
+
+  retrieveSearchParams() {
+    this.route.queryParams.subscribe(params => {
+      this.term = params['term'] || '';
+      if (this.term) {
+        this.searchCards();
+      }
+    });
   }
 
   searchCards() {

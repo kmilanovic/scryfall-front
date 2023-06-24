@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router } from "@angular/router";
+import {CardModel} from "../../../pages/card/model/dto/card.model";
 
 @Component({
   selector: 'app-side-menu',
@@ -10,6 +11,8 @@ export class SideMenuComponent {
   @Input() isCollapsed!: boolean;
   @Output() isCollapsedChange = new EventEmitter<boolean>();
   isSmallScreen: boolean = window.innerWidth <= 765;
+  term!: string;
+  cardList: CardModel[] = [];
 
   constructor(
     public router: Router,
@@ -28,7 +31,11 @@ export class SideMenuComponent {
   }
 
   navigateToSearchCards(): void {
-    this.router.navigate(['/card-list']);
+    this.router.navigate(['/card-list'], { replaceUrl: true }).then(() => {
+      this.term = '';
+      this.cardList = [];
+      window.location.reload();
+    });
   }
 
   navigateToSearchSets(): void {
@@ -39,4 +46,7 @@ export class SideMenuComponent {
     this.router.navigate(['/my-set-list']);
   }
 
+  navigateToCreateSet(): void {
+    this.router.navigate(['/create-set']);
+  }
 }

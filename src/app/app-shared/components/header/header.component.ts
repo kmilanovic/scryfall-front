@@ -1,6 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthProvider } from "../../../app-core/providers/auth.provider";
+import {CardModel} from "../../../pages/card/model/dto/card.model";
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,9 @@ export class HeaderComponent {
 
   isXsScreen = window.innerWidth < 576;
   isSmScreen = window.innerWidth >= 576 && window.innerWidth < 768;
-
   user = localStorage.getItem('email');
+  term!: string;
+  cardList: CardModel[] = [];
 
   constructor(
     private router: Router,
@@ -34,6 +36,11 @@ export class HeaderComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/card-list']);
+    this.router.navigate(['/card-list'], { replaceUrl: true }).then(() => {
+      // Clear input field and table items
+      this.term = '';
+      this.cardList = [];
+      window.location.reload();
+    });
   }
 }
