@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  CARD_LIST_PATH,
+  CARD_LIST_PATH, CREATE_SET_PATH,
   LOGIN_PATH,
   MY_SET_LIST_PATH,
   SET_CARD_LIST_PATH,
@@ -48,7 +48,12 @@ const routes: Routes = [
         path: MY_SET_LIST_PATH,
         loadChildren: () => import('./pages/my-set/my-set.module').then((mod) => mod.MySetModule),
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: CREATE_SET_PATH,
+        loadChildren: () => import('./pages/create-set/create-set.module').then((mod) => mod.CreateSetModule),
+        canActivate: [AuthGuard]
+      },
     ]
   }
 ];

@@ -30,11 +30,15 @@ export class CardProvider {
     return this.http.post<CardModel>(`${this.cardUrl}search`, command);
   }
 
-  getCardsBySet(command: SetCodeCommand): Observable<CardModel> {
+  searchCardsBySetCode(command: SetCodeCommand): Observable<CardModel> {
     return this.http.post<CardModel>(`${this.cardUrl}search-by-code`, command)
   }
 
   saveCardInSet(command: SaveCardInSetCommand): Observable<void> {
     return this.http.post<void>(`${this.cardUrl}save-in-set`, command);
+  }
+
+  getCardsBySetId(command: ByIdCommand): Observable<CardModel> {
+    return this.http.post<CardModel>(`${this.cardUrl}get-by-set`, command)
   }
 }

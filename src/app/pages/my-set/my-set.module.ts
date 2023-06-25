@@ -18,12 +18,14 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
+import { MySetCardListComponent } from './components/my-set-card-list/my-set-card-list.component';
 
 
 
 @NgModule({
   declarations: [
-    MySetListComponent
+    MySetListComponent,
+    MySetCardListComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,32 @@
+<nz-col nzSpan="24" class="px-4 py-3">
+  <nz-page-header [nzGhost]="false" style="border: 1px solid #e8e8e8; border-bottom: none">
+    <nz-page-header-title>{{ 'Create set' }}</nz-page-header-title>
+    <nz-page-header-extra>
+      <button (click)="addSet()">SAVE</button>
+    </nz-page-header-extra>
+  </nz-page-header>
+  <nz-card>
+    <form nz-form class="w-100">
+      <nz-form-item>
+        <nz-form-label nzFor="setName" [nzMd]="4" [nzSm]="24" [nzXs]="24" nzRequired>Set name</nz-form-label>
+        <nz-form-control [nzMd]="12" [nzSm]="24" [nzXs]="24" [nzErrorTip]="userErrorTpl">
+          <input [(ngModel)]="setName" name="setName" autocomplete="off" nz-input type="text"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="setIcon" [nzMd]="4" [nzSm]="24" [nzXs]="24" nzRequired>Set icon</nz-form-label>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a set icon" class="centered-select" [(ngModel)]="selectedIconId" name="selectedIcon">
+          <nz-option *ngFor="let setIcon of setIconList" [nzLabel]="setIcon.name" [nzValue]="setIcon.id"></nz-option>
+        </nz-select>
+        <img *ngIf="selectedIconId" [src]="getIconPath(selectedIconId)" alt="Selected Icon" style="margin-left: 20px; height: 40px" >
+      </nz-form-item>
+    </form>
+  </nz-card>
+</nz-col>
+
+<ng-template #userErrorTpl let-control>
+  <ng-container *ngIf="control.hasError('required')">
+    {{'common.formValidation.required'}}
+  </ng-container>
+</ng-template>

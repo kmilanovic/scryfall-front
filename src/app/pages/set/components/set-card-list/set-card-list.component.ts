@@ -23,26 +23,26 @@ export class SetCardListComponent implements OnInit {
               private setService: SetService) { }
 
   ngOnInit(): void {
-    this.getCardsBySet();
+    this.searchCardsBySet();
   }
 
   onCurrentPageDataChange($event: readonly CardModel[]): void {
     this.listOfCurrentPageData = $event;
   }
 
-  getCardsBySet() {
+  searchCardsBySet() {
     this.showTableLoading = true;
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const setCodeCommand: SetCodeCommand = new SetCodeCommand();
         setCodeCommand.code = params.get('code');
 
-        return this.cardProvider.getCardsBySet(setCodeCommand);
+        return this.cardProvider.searchCardsBySetCode(setCodeCommand);
       })
     ).subscribe({
       next: (res: any) => {
        this.setCardList = res.data;
-        this.selectedSet = this.setService.getSelectedSet();
+       this.selectedSet = this.setService.getSelectedSet();
        this.showTable = true;
        this.showTableLoading = false;
 

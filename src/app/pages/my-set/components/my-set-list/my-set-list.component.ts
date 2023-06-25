@@ -34,8 +34,8 @@ export class MySetListComponent implements OnInit {
     })
   }
 
-  navigateToSetCardList(setCode: string) {
-    this.router.navigate(['/set-list', setCode])
+  navigateToSetCardList(setId: number) {
+    this.router.navigate(['/my-set-list', setId])
   }
 
 }
