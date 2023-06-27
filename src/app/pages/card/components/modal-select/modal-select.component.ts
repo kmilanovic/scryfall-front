@@ -40,6 +40,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class ModalSelectComponent{
   @Input() mySetList!: MySetModel[];
   @Input() cardId!: string;
+  @Input() cardName!: string;
+  @Input() imageUriNormal!: string;
   selectedValue: number | null = null;
 
   constructor(private cardProvider: CardProvider,
@@ -49,7 +51,9 @@ export class ModalSelectComponent{
     if (this.selectedValue !== null) {
       const command: SaveCardInSetCommand = {
         setId: this.selectedValue,
-        cardId: this.cardId
+        cardId: this.cardId,
+        cardName: this.cardName,
+        imageUriNormal: this.imageUriNormal
       };
       this.cardProvider.saveCardInSet(command).subscribe({
         next: () => {
