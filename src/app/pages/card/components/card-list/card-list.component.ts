@@ -66,7 +66,7 @@ export class CardListComponent implements OnInit {
     this.listOfCurrentPageData = $event;
   }
 
-  public openModal(cardId: string): void {
+  /*public openModal(cardId: string, cardName: string, imageUriNormal: string): void {
     const userId = localStorage.getItem('userId');
     this.setProvider.getMySets(Number(userId)).subscribe((sets: MySetModel[]) => {
       this.mySetList = sets || [];
@@ -75,10 +75,12 @@ export class CardListComponent implements OnInit {
         nzContent: ModalSelectComponent,
         nzComponentParams: {
           mySetList: this.mySetList,
-          cardId: cardId
+          cardId: cardId,
+          cardName: cardName,
+          imageUriNormal: imageUriNormal
         },
         nzFooter: null
       });
     });
-  }
+  }*/
 }
