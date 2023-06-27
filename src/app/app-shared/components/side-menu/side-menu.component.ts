@@ -43,7 +43,7 @@ export class SideMenuComponent {
   }
 
   navigateToMySets(): void {
-    this.router.navigate(['/my-set-list']);
+    this.router.navigate(['/my-set-list'], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
   navigateToCreateSet(): void {

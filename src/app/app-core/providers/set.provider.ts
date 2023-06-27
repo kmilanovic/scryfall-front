@@ -1,12 +1,11 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SetModel} from "../../pages/set/model/dto/set.model";
 import {environment} from "../../../environments/environment";
 import {MySetModel} from "../../pages/set/model/dto/my-set.model";
 import {SetIconModel} from "../../pages/set/model/dto/set-icon.model";
 import {SetAddCommand} from "../../pages/create-set/model/command/set-add.command";
-import {SaveCardInSetCommand} from "../../pages/card/model/command/save-card-in-set.command";
 
 @Injectable({providedIn: 'root'})
 export class SetProvider {
@@ -19,9 +18,13 @@ export class SetProvider {
     return this.http.get<SetModel[]>(`${this.setUrl}all-api`)
   }
 
-  getMySets(userId: number): Observable<MySetModel[]> {
+  getMySets(userId: number, pageIndex: number, pageSize: number): Observable<any> {
     const headers = new HttpHeaders().set('userId', userId.toString());
-    return this.http.get<MySetModel[]>(`${this.setUrl}all`, {headers})
+    const params = new HttpParams()
+      .set('pageIndex', pageIndex.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<any>(`${this.setUrl}all`, { headers, params });
   }
 
   getSetIcons(): Observable<SetIconModel[]> {

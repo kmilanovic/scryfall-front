@@ -4,9 +4,9 @@ import {SetModel} from "../../../set/model/dto/set.model";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
 import {SetService} from "../../../set/set.service";
-import {SetCodeCommand} from "../../../set/model/command/set-code.command";
 import {ByIdCommand} from "../../../card/model/command/by-id.command";
 import {switchMap} from "rxjs";
+import {CardDbModel} from "../../../card/model/dto/card-db.model";
 
 @Component({
   selector: 'app-my-set-card-list',
@@ -15,8 +15,8 @@ import {switchMap} from "rxjs";
 })
 export class MySetCardListComponent implements OnInit {
   showTable = false;
-  setCardList!: CardModel[];
-  listOfCurrentPageData: readonly CardModel[] = [];
+  setCardList!: CardDbModel[];
+  listOfCurrentPageData: readonly CardDbModel[] = [];
   showTableLoading = false;
   selectedSet!: SetModel | null
   constructor(private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class MySetCardListComponent implements OnInit {
     this.getCardsBySetId();
   }
 
-  onCurrentPageDataChange($event: readonly CardModel[]): void {
+  onCurrentPageDataChange($event: readonly CardDbModel[]): void {
     this.listOfCurrentPageData = $event;
   }
 
@@ -43,10 +43,10 @@ export class MySetCardListComponent implements OnInit {
     ).subscribe( {
       next: (res: any) => {
         this.setCardList = res;
+        console.log(this.setCardList)
         this.selectedSet = this.setService.getSelectedSet();
         this.showTable = true;
         this.showTableLoading = false;
-        console.log(this.setCardList)
       },
       error: (error) => {
         console.error('Error retrieving cards:', error);
