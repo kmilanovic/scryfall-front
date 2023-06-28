@@ -24,7 +24,8 @@ export class MySetListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const pageIndex = params['pageIndex'] || 1;
+      const pageIndex = Number(params['pageIndex']) || 1;
+      this.currentPageIndex = pageIndex;
       this.getMySets(pageIndex, this.pageSize);
     });
   }
@@ -32,7 +33,7 @@ export class MySetListComponent implements OnInit {
   getMySets(pageIndex: number, pageSize: number): void {
     this.showTableLoading = true;
     const userId = localStorage.getItem('userId');
-    this.setProvider.getMySets(Number(userId), pageIndex, pageSize).subscribe((res: any) => {
+    this.setProvider.getMySetsPaginated(Number(userId), pageIndex, pageSize).subscribe((res: any) => {
       this.setList = res.content;
       this.totalItems = res.totalElements;
       this.showTable = true;
@@ -54,8 +55,8 @@ export class MySetListComponent implements OnInit {
 
   updateQueryParams(params: { [key: string]: any }): void {
     const queryParams = {
-      ...this.route.snapshot.queryParams, // Preserve existing query parameters
-      ...params // Add or update the new query parameters
+      ...this.route.snapshot.queryParams,
+      ...params
     };
 
     this.router.navigate([], {
@@ -66,7 +67,11 @@ export class MySetListComponent implements OnInit {
   }
 
   navigateToSetCardList(setId: number) {
-    this.router.navigate(['/my-set-list', setId])
+    const queryParams = {
+      pageIndex: this.currentPageIndex,
+      pageSize: this.pageSize
+    };
+    this.router.navigate(['/my-set-list', setId]);
   }
 
 }

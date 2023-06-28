@@ -18,13 +18,18 @@ export class SetProvider {
     return this.http.get<SetModel[]>(`${this.setUrl}all-api`)
   }
 
-  getMySets(userId: number, pageIndex: number, pageSize: number): Observable<any> {
+  getMySetsPaginated(userId: number, pageIndex: number, pageSize: number): Observable<any> {
     const headers = new HttpHeaders().set('userId', userId.toString());
     const params = new HttpParams()
       .set('pageIndex', pageIndex.toString())
       .set('pageSize', pageSize.toString());
 
-    return this.http.get<any>(`${this.setUrl}all`, { headers, params });
+    return this.http.get<any>(`${this.setUrl}all-paginated`, { headers, params });
+  }
+
+  getMySets(userId: number): Observable<MySetModel[]> {
+    const headers = new HttpHeaders().set('userId', userId.toString());
+    return this.http.get<MySetModel[]>(`${this.setUrl}all`, {headers})
   }
 
   getSetIcons(): Observable<SetIconModel[]> {

@@ -39,7 +39,7 @@
             <a [routerLink]="card.id">
               <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="expand"></i>Details</li>
             </a>
-            <a > <!--Dodati (click) event za otvaranje modala-->
+            <a (click)="openModal(card.id, card.name, card.image_uris.normal)">
               <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="plus-circle"></i>Add to set</li>
             </a>
           </ul>
