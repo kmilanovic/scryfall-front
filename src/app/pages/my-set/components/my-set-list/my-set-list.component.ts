@@ -67,11 +67,7 @@ export class MySetListComponent implements OnInit {
   }
 
   navigateToSetCardList(setId: number) {
-    const queryParams = {
-      pageIndex: this.currentPageIndex,
-      pageSize: this.pageSize
-    };
-    this.router.navigate(['/my-set-list', setId]);
+    this.router.navigate(['/my-set-list', setId], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
 }

@@ -20,7 +20,12 @@
   #rowSelectionTable
   nzShowSizeChanger
   [nzData]="setCardList"
-  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+  [nzTotal]="totalItems"
+  [nzPageIndex]="currentPageIndex"
+  [nzPageSize]="pageSize"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  (nzPageSizeChange)="onPageSizeChange($event)"
+  [nzFrontPagination]="false">
   <thead>
   <tr>
     <th>Name</th>

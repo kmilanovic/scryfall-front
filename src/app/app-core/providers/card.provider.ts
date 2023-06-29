@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { map, Observable } from "rxjs";
 import { CardModel, RulingModel } from "../../pages/card/model/dto/card.model";
 import {environment} from "../../../environments/environment";
@@ -40,5 +40,13 @@ export class CardProvider {
 
   getCardsBySetId(command: ByIdCommand): Observable<CardModel> {
     return this.http.post<CardModel>(`${this.cardUrl}get-by-set`, command)
+  }
+
+  getCardsBySetIdPaginated(command: ByIdCommand, pageIndex: number, pageSize: number): Observable<any> {
+    const params = new HttpParams()
+      .set('pageIndex', pageIndex.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.post<any>(`${this.cardUrl}get-by-set-paginated`, command, { params });
   }
 }

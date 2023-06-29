@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CardModel} from "../../../card/model/dto/card.model";
 import {SetModel} from "../../../set/model/dto/set.model";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
 import {SetService} from "../../../set/set.service";
 import {ByIdCommand} from "../../../card/model/command/by-id.command";
@@ -19,19 +19,27 @@ export class MySetCardListComponent implements OnInit {
   listOfCurrentPageData: readonly CardDbModel[] = [];
   showTableLoading = false;
   selectedSet!: SetModel | null
+  currentPageIndex = 1;
+  pageSize = 10;
+  totalItems = 0;
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider,
-              private setService: SetService) { }
+              private setService: SetService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.getCardsBySetId();
+    this.route.queryParams.subscribe(params => {
+      const pageIndex = Number(params['pageIndex']) || 1;
+      this.currentPageIndex = pageIndex;
+      this.getCardsBySetId(pageIndex, this.pageSize);
+    });
   }
 
   onCurrentPageDataChange($event: readonly CardDbModel[]): void {
     this.listOfCurrentPageData = $event;
   }
 
-  getCardsBySetId() {
+  /*getCardsBySetId() {
     this.showTableLoading = true;
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
@@ -52,6 +60,55 @@ export class MySetCardListComponent implements OnInit {
         console.error('Error retrieving cards:', error);
       }
     })
+  }*/
+
+  getCardsBySetId(pageIndex: number, pageSize: number) {
+    this.showTableLoading = true;
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        const command: ByIdCommand = new ByIdCommand();
+        command.id = params.get('id');
+
+        return this.cardProvider.getCardsBySetIdPaginated(command, pageIndex, pageSize); // Modified call
+      })
+    ).subscribe({
+      next: (res: any) => {
+        this.setCardList = res.content;
+        this.totalItems = res.totalElements;
+        console.log(this.setCardList)
+        this.selectedSet = this.setService.getSelectedSet();
+        this.showTable = true;
+        this.showTableLoading = false;
+      },
+      error: (error) => {
+        console.error('Error retrieving cards:', error);
+      }
+    });
+  }
+
+  onPageIndexChange(pageIndex: number): void {
+    this.currentPageIndex = pageIndex;
+    this.updateQueryParams({ pageIndex: pageIndex });
+    this.getCardsBySetId(pageIndex, this.pageSize);
+  }
+
+  onPageSizeChange(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.updateQueryParams({ pageIndex: 1, pageSize });
+    this.getCardsBySetId(1, pageSize);
+  }
+
+  updateQueryParams(params: { [key: string]: any }): void {
+    const queryParams = {
+      ...this.route.snapshot.queryParams,
+      ...params
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+      queryParamsHandling: 'merge'
+    });
   }
 
 }
