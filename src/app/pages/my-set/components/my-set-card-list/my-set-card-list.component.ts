@@ -35,33 +35,6 @@ export class MySetCardListComponent implements OnInit {
     });
   }
 
-  onCurrentPageDataChange($event: readonly CardDbModel[]): void {
-    this.listOfCurrentPageData = $event;
-  }
-
-  /*getCardsBySetId() {
-    this.showTableLoading = true;
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        const command: ByIdCommand = new ByIdCommand();
-        command.id = params.get('id');
-
-        return this.cardProvider.getCardsBySetId(command);
-      })
-    ).subscribe( {
-      next: (res: any) => {
-        this.setCardList = res;
-        console.log(this.setCardList)
-        this.selectedSet = this.setService.getSelectedSet();
-        this.showTable = true;
-        this.showTableLoading = false;
-      },
-      error: (error) => {
-        console.error('Error retrieving cards:', error);
-      }
-    })
-  }*/
-
   getCardsBySetId(pageIndex: number, pageSize: number) {
     this.showTableLoading = true;
     this.route.paramMap.pipe(
@@ -75,7 +48,6 @@ export class MySetCardListComponent implements OnInit {
       next: (res: any) => {
         this.setCardList = res.content;
         this.totalItems = res.totalElements;
-        console.log(this.setCardList)
         this.selectedSet = this.setService.getSelectedSet();
         this.showTable = true;
         this.showTableLoading = false;

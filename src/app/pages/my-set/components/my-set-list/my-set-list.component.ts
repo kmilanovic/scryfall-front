@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SetProvider } from '../../../../app-core/providers/set.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MySetModel } from '../../../set/model/dto/my-set.model';
+import {SetService} from "../../../set/set.service";
+import {MySetCardListComponent} from "../my-set-card-list/my-set-card-list.component";
 
 @Component({
   selector: 'app-my-set-list',
@@ -19,7 +21,8 @@ export class MySetListComponent implements OnInit {
   constructor(
     private setProvider: SetProvider,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public setService: SetService
   ) {}
 
   ngOnInit(): void {
@@ -66,8 +69,9 @@ export class MySetListComponent implements OnInit {
     });
   }
 
-  navigateToSetCardList(setId: number) {
-    this.router.navigate(['/my-set-list', setId], {queryParams: {pageIndex: 1, pageSize:10}});
+  navigateToSetCardList(set: MySetModel) {
+    this.setService.setSelectedSet(set);
+    this.router.navigate(['/my-set-list', set.set_id], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
 }

@@ -43,6 +43,7 @@ export class SetCardListComponent implements OnInit {
       next: (res: any) => {
        this.setCardList = res.data;
        this.selectedSet = this.setService.getSelectedSet();
+        console.log(this.selectedSet)
        this.showTable = true;
        this.showTableLoading = false;
 
