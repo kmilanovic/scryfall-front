@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MySetModel } from '../../../set/model/dto/my-set.model';
 import {SetService} from "../../../set/set.service";
 import {MySetCardListComponent} from "../my-set-card-list/my-set-card-list.component";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-my-set-list',
@@ -22,7 +23,8 @@ export class MySetListComponent implements OnInit {
     private setProvider: SetProvider,
     private router: Router,
     private route: ActivatedRoute,
-    public setService: SetService
+    public setService: SetService,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -74,4 +76,16 @@ export class MySetListComponent implements OnInit {
     this.router.navigate(['/my-set-list', set.set_id], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
+  deleteSet(set_id: number) {
+    console.log(set_id)
+    this.setProvider.deleteSet(set_id).subscribe( {
+      next: () => {
+        this.message.success('Set deleted successfully.');
+        this.getMySets(this.currentPageIndex, this.pageSize);
+      },
+      error: (error) => {
+        this.message.error('Error deleting set. Please try again later.');
+      }
+    })
+  }
 }

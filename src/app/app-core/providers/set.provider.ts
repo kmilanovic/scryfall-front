@@ -39,4 +39,8 @@ export class SetProvider {
   addSet(command: SetAddCommand): Observable<void> {
     return this.http.post<void>(`${this.setUrl}add`, command);
   }
+
+  deleteSet(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.setUrl}${id}`)
+  }
 }

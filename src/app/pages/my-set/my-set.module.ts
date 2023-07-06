@@ -19,6 +19,7 @@ import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import { MySetCardListComponent } from './components/my-set-card-list/my-set-card-list.component';
+import {NzMessageModule} from "ng-zorro-antd/message";
 
 
 
@@ -45,6 +46,7 @@ import { MySetCardListComponent } from './components/my-set-card-list/my-set-car
     NzDropDownModule,
     NzTagModule,
     NzBreadCrumbModule,
+    NzMessageModule
   ]
 })
 export class MySetModule { }
