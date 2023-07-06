@@ -7,6 +7,8 @@ import {SetService} from "../../../set/set.service";
 import {ByIdCommand} from "../../../card/model/command/by-id.command";
 import {switchMap} from "rxjs";
 import {CardDbModel} from "../../../card/model/dto/card-db.model";
+import {SetProvider} from "../../../../app-core/providers/set.provider";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-my-set-card-list',
@@ -25,7 +27,9 @@ export class MySetCardListComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider,
               private setService: SetService,
-              private router: Router) { }
+              private router: Router,
+              private setProvider: SetProvider,
+              private message: NzMessageService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -80,6 +84,21 @@ export class MySetCardListComponent implements OnInit {
       relativeTo: this.route,
       queryParams,
       queryParamsHandling: 'merge'
+    });
+  }
+
+  deleteCardFromSet(cardId: number) {
+    // Get the setId from the URL parameters
+    const setId = this.route.snapshot.paramMap.get('id');
+
+    this.setProvider.deleteCardFromSet(setId, cardId).subscribe({
+      next: () => {
+        this.message.success('Card deleted successfully.');
+        this.getCardsBySetId(this.currentPageIndex, this.pageSize);
+      },
+      error: (error) => {
+        this.message.error('Error deleting card. Please try again later.');
+      },
     });
   }
 

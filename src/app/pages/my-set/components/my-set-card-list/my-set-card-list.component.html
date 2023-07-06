@@ -50,6 +50,9 @@
           <a [routerLink]="card.id">
             <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="expand"></i>Details</li>
           </a>
+          <a (click)="deleteCardFromSet(card.card_id)">
+            <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="delete"></i>Delete</li>
+          </a>
         </ul>
       </nz-dropdown-menu>
     </td>
