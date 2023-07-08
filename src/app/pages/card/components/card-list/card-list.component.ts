@@ -83,4 +83,18 @@ export class CardListComponent implements OnInit {
       });
     });
   }
+
+  getRandomCard() {
+    this.cardProvider.getRandomCard().subscribe({
+      next: (res: any) => {
+        this.cardList = res;
+        console.log(this.cardList)
+        this.showTableLoading = false;
+        this.showTable = true;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+  }
 }

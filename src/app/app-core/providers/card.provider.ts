@@ -49,4 +49,8 @@ export class CardProvider {
 
     return this.http.post<any>(`${this.cardUrl}get-by-set-paginated`, command, { params });
   }
+
+  getRandomCard(): Observable<CardModel> {
+    return this.http.get<CardModel>(`${this.cardUrl}random`);
+  }
 }

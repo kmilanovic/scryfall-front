@@ -1,12 +1,22 @@
 <div class="spinner-container" *ngIf="showTableLoading">
   <nz-spin></nz-spin>
 </div>
-<nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton" class="searchInput mt-2 mb-4">
-  <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="term" (keyup.enter)="searchCards()"/>
-</nz-input-group>
+
+<div class="searchContainer">
+  <div class="searchInput">
+    <nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton">
+      <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="term" (keyup.enter)="searchCards()" />
+    </nz-input-group>
+  </div>
+
+  <button nz-button nzType="primary" nzSize="large" nzSearch class="randomCard" (click)="getRandomCard()">
+    <span nz-icon nzType="question-circle" nzTheme="outline"></span>
+  </button>
+</div>
 <ng-template #suffixButton>
   <button nz-button nzType="primary" nzSize="large" nzSearch (click)="searchCards()">Search</button>
 </ng-template>
+
 
   <nz-table
     *ngIf="showTable"
