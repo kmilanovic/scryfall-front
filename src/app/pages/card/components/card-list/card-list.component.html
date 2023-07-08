@@ -4,17 +4,57 @@
 
 <div class="searchContainer">
   <div class="searchInput">
-    <nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton">
+    <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchButton">
       <input type="text" nz-input placeholder="Enter a card" [(ngModel)]="term" (keyup.enter)="searchCards()" />
+      <button nz-button nzType="primary" nzSize="large" nzSearch class="button"
+              (click)="getRandomCard()"
+              nz-tooltip
+              nzTooltipTitle="Random card"
+              nzTooltipPlacement="bottom"
+              nzTooltipTrigger="hover"><span nz-icon nzType="question-circle" nzTheme="outline"></span></button>
     </nz-input-group>
-  </div>
 
-  <button nz-button nzType="primary" nzSize="large" nzSearch class="randomCard" (click)="getRandomCard()">
-    <span nz-icon nzType="question-circle" nzTheme="outline"></span>
-  </button>
+    <a (click)="toggleButtons()">Advanced search</a>
+
+    <div class="buttonContainer" *ngIf="showButtons">
+      <div class="inputContainer">
+        <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByMultiverseButton" class="small-input-group">
+          <input type="text" nz-input placeholder="Enter multiverse id" [(ngModel)]="multiverse"/>
+        </nz-input-group>
+      </div>
+      <nz-divider></nz-divider>
+      <div class="inputContainer">
+        <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByCatalogButton" class="small-input-group">
+          <input type="text" nz-input placeholder="Enter catalog id" [(ngModel)]="catalog" />
+        </nz-input-group>
+      </div>
+      <nz-divider></nz-divider>
+      <div class="inputContainer">
+        <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByCardIdButton" class="small-input-group">
+          <input type="text" nz-input placeholder="Enter card id" [(ngModel)]="cardId"/>
+        </nz-input-group>
+      </div>
+    </div>
+  </div>
 </div>
-<ng-template #suffixButton>
-  <button nz-button nzType="primary" nzSize="large" nzSearch (click)="searchCards()">Search</button>
+<ng-template #searchButton>
+  <button nz-button nzType="primary" nzSize="large" nzSearch
+          (click)="searchCards()">Search</button>
+</ng-template>
+
+<ng-template #searchByMultiverseButton>
+  <button nz-button nzType="primary" nzSize="large" nzSearch
+          (click)="getCardByMultiverse()">Search</button>
+</ng-template>
+
+<ng-template #searchByCatalogButton>
+  <button nz-button nzType="primary" nzSize="large" nzSearch
+          (click)="getCardByCatalog()">Search</button>
+</ng-template>
+
+<ng-template #searchByCardIdButton>
+  <button nz-button nzType="primary" nzSize="large" nzSearch
+          (click)="getCardByCardId()">Search</button>
 </ng-template>
 
 

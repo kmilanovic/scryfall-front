@@ -22,6 +22,7 @@ import {NzModalModule} from "ng-zorro-antd/modal";
 import { ModalSelectComponent } from './components/modal-select/modal-select.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 
 @NgModule({
@@ -30,27 +31,28 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     CardDetailsComponent,
     ModalSelectComponent,
   ],
-  imports: [
-    CommonModule,
-    CardRoutingModule,
-    NzInputModule,
-    NzIconModule,
-    NzDividerModule,
-    NzTableModule,
-    FormsModule,
-    NzPaginationModule,
-    NzButtonModule,
-    NzSpinModule,
-    NzImageModule,
-    NzCardModule,
-    NzGridModule,
-    NzMenuModule,
-    NzDropDownModule,
-    NzTagModule,
-    NzModalModule,
-    NzSelectModule,
-    NzMessageModule
-  ]
+    imports: [
+        CommonModule,
+        CardRoutingModule,
+        NzInputModule,
+        NzIconModule,
+        NzDividerModule,
+        NzTableModule,
+        FormsModule,
+        NzPaginationModule,
+        NzButtonModule,
+        NzSpinModule,
+        NzImageModule,
+        NzCardModule,
+        NzGridModule,
+        NzMenuModule,
+        NzDropDownModule,
+        NzTagModule,
+        NzModalModule,
+        NzSelectModule,
+        NzMessageModule,
+        NzToolTipModule
+    ]
 })
 export class CardModule {
 }

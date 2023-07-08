@@ -7,10 +7,11 @@ import {ByIdCommand} from "../../pages/card/model/command/by-id.command";
 import {SearchCardCommand} from "../../pages/card/model/command/search-card.command";
 import {SetCodeCommand} from "../../pages/set/model/command/set-code.command";
 import {SaveCardInSetCommand} from "../../pages/card/model/command/save-card-in-set.command";
+import {CardRequestCommand} from "../../pages/card/model/command/card-request.command";
 
 @Injectable({providedIn: 'root'})
 export class CardProvider {
-  private cardUrl  = `${environment.apiUrl}card/`
+  private cardUrl= `${environment.apiUrl}card/`
 
   constructor(private http: HttpClient) {
   }
@@ -52,5 +53,17 @@ export class CardProvider {
 
   getRandomCard(): Observable<CardModel> {
     return this.http.get<CardModel>(`${this.cardUrl}random`);
+  }
+
+  getCardByMultiverse(command: CardRequestCommand): Observable<CardModel> {
+    return this.http.post<CardModel>(`${this.cardUrl}by-multiverse`, command);
+  }
+
+  getCardByCatalog(command: CardRequestCommand): Observable<CardModel> {
+    return this.http.post<CardModel>(`${this.cardUrl}by-catalog`, command);
+  }
+
+  getCardByCardId(command: ByIdCommand): Observable<CardModel> {
+    return this.http.post<CardModel>(`${this.cardUrl}by-id`, command);
   }
 }
