@@ -17,6 +17,10 @@ export class AuthProvider {
     return this.http.post<any>("http://localhost:4200/api/auth/login", {email, password});
   }
 
+  register(email:string, password: any): Observable<UserModel> {
+    return this.http.post<any>("http://localhost:4200/api/auth/register", {email, password});
+  }
+
   isUserLoggedIn() {
     let jwtToken = localStorage.getItem("token")
     console.log(!(jwtToken === null));

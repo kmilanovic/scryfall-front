@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   CARD_LIST_PATH, CREATE_SET_PATH,
   LOGIN_PATH,
-  MY_SET_LIST_PATH,
+  MY_SET_LIST_PATH, REGISTER_PATH,
   SET_CARD_LIST_PATH,
   SET_LIST_PATH
 } from "./app-core/globals/route.properties";
@@ -20,6 +20,11 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./pages/login/login.module').then((mod) => mod.LoginModule),
+        canActivate: [LoginGuard]
+      },
+      {
+        path: REGISTER_PATH,
+        loadChildren: () => import('./pages/register/register.module').then((mod) => mod.RegisterModule),
         canActivate: [LoginGuard]
       }
     ]

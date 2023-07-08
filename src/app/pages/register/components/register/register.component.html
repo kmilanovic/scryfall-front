@@ -1,11 +1,11 @@
-<div class="login-wrapper">
-  <div class="login-box">
+<div class="register-wrapper">
+  <div class="register-box">
     <div class="logo-wrapper">
       <img alt="logo" nz-image [nzSrc]="'assets/icon/logo.svg'" [nzDisablePreview]="true">
     </div>
     <div class="form-wrapper">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <h5>LOGIN</h5>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h5>REGISTER</h5>
         <nz-form-item>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="user">
@@ -23,8 +23,8 @@
         <nz-form-item>
           <nz-form-control>
             <nz-col nzSpan="24">
-              <button nz-button nzType="primary" [disabled]="loginForm.invalid" style="width: 100%;">Login</button>
-              <a (click)="navigateToRegister()">Register</a>
+              <button nz-button nzType="primary" [disabled]="registerForm.invalid" style="width: 100%;">Register</button>
+              <a (click)="navigateToLogin()">Login</a>
             </nz-col>
           </nz-form-control>
         </nz-form-item>

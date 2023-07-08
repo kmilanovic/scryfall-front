@@ -19,6 +19,7 @@ import { LoginLayoutComponent } from "./layouts/login-layout/login-layout.compon
 import { AuthInterceptor } from "./app-core/util/auth.interceptor";
 import { en_US, NZ_I18N } from "ng-zorro-antd/i18n";
 import {AppCoreModule} from "./app-core/app-core.module";
+import {RegisterModule} from "./pages/register/register.module";
 
 registerLocaleData(en);
 
@@ -40,6 +41,7 @@ registerLocaleData(en);
     AppSharedModule,
     NzGridModule,
     LoginModule,
+    RegisterModule,
     AppCoreModule
   ],
   providers: [
