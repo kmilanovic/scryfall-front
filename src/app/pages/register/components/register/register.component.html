@@ -7,16 +7,16 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <h5>REGISTER</h5>
         <nz-form-item>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="The input is not valid E-mail!">
             <nz-input-group nzPrefixIcon="user">
               <input nz-input formControlName="email" placeholder="Email"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="Please input your password!">
             <nz-input-group nzPrefixIcon="lock">
-              <input nz-input formControlName="password" type="password" placeholder="Password"/>
+              <input nz-input formControlName="password"  type="password" placeholder="Password"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
