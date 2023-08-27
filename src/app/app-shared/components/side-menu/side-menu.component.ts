@@ -1,5 +1,5 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { Router } from "@angular/router";
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Router} from "@angular/router";
 import {CardModel} from "../../../pages/card/model/dto/card.model";
 
 @Component({
@@ -13,6 +13,7 @@ export class SideMenuComponent {
   isSmallScreen: boolean = window.innerWidth <= 765;
   term!: string;
   cardList: CardModel[] = [];
+  isSearchSetsSelected: boolean = false;
 
   constructor(
     public router: Router,
@@ -31,22 +32,36 @@ export class SideMenuComponent {
   }
 
   navigateToSearchCards(): void {
+    //window.location.reload();
+    this.isSearchSetsSelected = false;
     this.router.navigate(['/card-list'], { replaceUrl: true }).then(() => {
       this.term = '';
       this.cardList = [];
-      window.location.reload();
     });
   }
 
   navigateToSearchSets(): void {
+    this.isSearchSetsSelected = true;
     this.router.navigate(['/set-list']);
   }
 
   navigateToMySets(): void {
+    this.isSearchSetsSelected = false;
     this.router.navigate(['/my-set-list'], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
   navigateToCreateSet(): void {
+    this.isSearchSetsSelected = false;
     this.router.navigate(['/create-set']);
+  }
+
+  toggleSetsSubmenu(): void {
+    if (this.isCollapsed) {
+      this.isCollapsed = false;
+      this.isCollapsedChange.emit(this.isCollapsed);
+
+      // Select the first item in the submenu
+      this.navigateToSearchSets();
+    }
   }
 }
