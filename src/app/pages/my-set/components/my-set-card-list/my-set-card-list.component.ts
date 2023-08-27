@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {CardModel} from "../../../card/model/dto/card.model";
 import {SetModel} from "../../../set/model/dto/set.model";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {CardProvider} from "../../../../app-core/providers/card.provider";

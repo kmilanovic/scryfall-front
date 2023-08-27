@@ -19,19 +19,19 @@
     <div class="buttonContainer" *ngIf="showButtons">
       <div class="inputContainer">
         <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByMultiverseButton" class="small-input-group">
-          <input type="text" nz-input placeholder="Enter multiverse id" [(ngModel)]="multiverse"/>
+          <input type="text" nz-input placeholder="Enter multiverse id" [(ngModel)]="multiverse" [disabled]="catalog !== '' || cardId !== ''" />
         </nz-input-group>
       </div>
       <nz-divider></nz-divider>
       <div class="inputContainer">
         <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByCatalogButton" class="small-input-group">
-          <input type="text" nz-input placeholder="Enter catalog id" [(ngModel)]="catalog" />
+          <input type="text" nz-input placeholder="Enter catalog id" [(ngModel)]="catalog" [disabled]="multiverse !== '' || cardId !== ''" />
         </nz-input-group>
       </div>
       <nz-divider></nz-divider>
       <div class="inputContainer">
         <nz-input-group nzSearch nzSize="large" [nzSuffix]="searchByCardIdButton" class="small-input-group">
-          <input type="text" nz-input placeholder="Enter card id" [(ngModel)]="cardId"/>
+          <input type="text" nz-input placeholder="Enter card id" [(ngModel)]="cardId" [disabled]="multiverse !== '' || catalog !== ''" />
         </nz-input-group>
       </div>
     </div>
@@ -44,17 +44,17 @@
 
 <ng-template #searchByMultiverseButton>
   <button nz-button nzType="primary" nzSize="large" nzSearch
-          (click)="getCardByMultiverse()">Search</button>
+          (click)="getCardByMultiverse()" [disabled]="catalog !== '' || cardId !== ''">Search</button>
 </ng-template>
 
 <ng-template #searchByCatalogButton>
   <button nz-button nzType="primary" nzSize="large" nzSearch
-          (click)="getCardByCatalog()">Search</button>
+          (click)="getCardByCatalog()" [disabled]="multiverse !== '' || cardId !== ''">Search</button>
 </ng-template>
 
 <ng-template #searchByCardIdButton>
   <button nz-button nzType="primary" nzSize="large" nzSearch
-          (click)="getCardByCardId()">Search</button>
+          (click)="getCardByCardId()" [disabled]="multiverse !== '' || catalog !== ''">Search</button>
 </ng-template>
 
 

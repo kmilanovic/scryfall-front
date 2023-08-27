@@ -3,7 +3,6 @@ import { SetProvider } from '../../../../app-core/providers/set.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MySetModel } from '../../../set/model/dto/my-set.model';
 import {SetService} from "../../../set/set.service";
-import {MySetCardListComponent} from "../my-set-card-list/my-set-card-list.component";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({

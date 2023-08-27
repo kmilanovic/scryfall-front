@@ -24,10 +24,6 @@ export class SetListComponent implements OnInit {
     this.getSets();
   }
 
-  onCurrentPageDataChange($event: readonly SetModel[]): void {
-    this.listOfCurrentPageData = $event;
-  }
-
   getSets() {
     this.showTableLoading = true;
     this.setProvider.getSets().subscribe((res: any) => {
@@ -35,6 +31,10 @@ export class SetListComponent implements OnInit {
       this.showTableLoading = false;
       this.showTable = true;
     })
+  }
+
+  onCurrentPageDataChange($event: readonly SetModel[]): void {
+    this.listOfCurrentPageData = $event;
   }
 
   navigateToSetCardList(set: SetModel) {

@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CardModel} from "../../../card/model/dto/card.model";
-import {forkJoin, switchMap} from "rxjs";
+import {switchMap} from "rxjs";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SetCodeCommand} from "../../model/command/set-code.command";
 import {CardProvider} from "../../../../app-core/providers/card.provider";

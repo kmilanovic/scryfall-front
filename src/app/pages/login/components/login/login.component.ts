@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../../app-core/providers/auth.provider";
 import { Router } from "@angular/router";
 import { UserModel } from "../../model/dto/user.model";
-import {finalize, tap} from "rxjs";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-login',

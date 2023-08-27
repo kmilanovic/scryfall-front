@@ -27,7 +27,7 @@ export class CardListComponent implements OnInit {
   cardId: string = '';
   mySetList!: MySetModel[];
   nzModalRef!: NzModalRef;
-  showButtons = false; // Variable to toggle the visibility of the buttons
+  showButtons = false;
 
   constructor(
     public cardProvider: CardProvider,
@@ -155,5 +155,9 @@ export class CardListComponent implements OnInit {
 
   toggleButtons() {
     this.showButtons = !this.showButtons;
+  }
+
+  shouldDisableInputs(): boolean {
+    return this.multiverse !== '' || this.catalog !== '' || this.cardId !== '';
   }
 }

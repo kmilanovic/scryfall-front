@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { MySetModel } from '../../../set/model/dto/my-set.model';
 import {SaveCardInSetCommand} from "../../model/command/save-card-in-set.command";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
