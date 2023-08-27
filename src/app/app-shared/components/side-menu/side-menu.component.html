@@ -16,7 +16,7 @@
 
   <!-- Top level menu items -->
   <li nz-menu-divider *ngIf="!isSmallScreen || !isCollapsed"></li>
-  <li nz-menu-item (click)="navigateToSearchCards()">
+  <li nz-menu-item [class.ant-menu-item-selected]="isSearchCardsSelected" (click)="navigateToSearchCards()">
     <span nz-icon nzType="search"></span>
     <span>Search cards</span></li>
   <ng-container>
@@ -25,10 +25,10 @@
         <li nz-menu-item [class.ant-menu-item-selected]="isSearchSetsSelected" (click)="navigateToSearchSets()">
           <span nz-icon nzType="search"></span>
           <span>Search sets</span></li>
-        <li nz-menu-item (click)="navigateToMySets()">
+        <li nz-menu-item [class.ant-menu-item-selected]="isMySetsSelected" (click)="navigateToMySets()">
           <span nz-icon nzType="unordered-list"></span>
           <span>My sets</span></li>
-        <li nz-menu-item (click)="navigateToCreateSet()">
+        <li nz-menu-item [class.ant-menu-item-selected]="isCreateSetSelected" (click)="navigateToCreateSet()">
           <span nz-icon nzType="plus-circle"></span>
           <span>Create set</span></li>
       </ul>

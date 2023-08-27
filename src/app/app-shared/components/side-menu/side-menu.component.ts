@@ -13,6 +13,9 @@ export class SideMenuComponent {
   isSmallScreen: boolean = window.innerWidth <= 765;
   term!: string;
   cardList: CardModel[] = [];
+  isSearchCardsSelected: boolean = false;
+  isMySetsSelected: boolean = false;
+  isCreateSetSelected: boolean = false;
   isSearchSetsSelected: boolean = false;
 
   constructor(
@@ -33,7 +36,10 @@ export class SideMenuComponent {
 
   navigateToSearchCards(): void {
     //window.location.reload();
+    this.isSearchCardsSelected = true;
     this.isSearchSetsSelected = false;
+    this.isMySetsSelected = false;
+    this.isCreateSetSelected = false;
     this.router.navigate(['/card-list'], { replaceUrl: true }).then(() => {
       this.term = '';
       this.cardList = [];
@@ -41,17 +47,26 @@ export class SideMenuComponent {
   }
 
   navigateToSearchSets(): void {
+    this.isSearchCardsSelected = false;
     this.isSearchSetsSelected = true;
+    this.isMySetsSelected = false;
+    this.isCreateSetSelected = false;
     this.router.navigate(['/set-list']);
   }
 
   navigateToMySets(): void {
+    this.isSearchCardsSelected = false;
     this.isSearchSetsSelected = false;
+    this.isMySetsSelected = true;
+    this.isCreateSetSelected = false;
     this.router.navigate(['/my-set-list'], {queryParams: {pageIndex: 1, pageSize:10}});
   }
 
   navigateToCreateSet(): void {
+    this.isSearchCardsSelected = false;
     this.isSearchSetsSelected = false;
+    this.isMySetsSelected = false;
+    this.isCreateSetSelected = true;
     this.router.navigate(['/create-set']);
   }
 
