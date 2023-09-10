@@ -34,7 +34,7 @@
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu nzSelectable>
           <li nz-menu-item [nzSelected]="false" style="pointer-events: none"></li>
-          <a [routerLink]="set.name">
+          <a (click)="navigateToSetCardList(set)">
             <li nz-menu-item><i style="margin-right: 8px" nz-icon nzType="expand"></i>Details</li>
           </a>
           <a (click)="deleteSet(set.set_id)">

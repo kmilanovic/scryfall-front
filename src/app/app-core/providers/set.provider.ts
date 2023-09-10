@@ -47,4 +47,8 @@ export class SetProvider {
   deleteCardFromSet(setId: string | null, cardId: number): Observable<void> {
     return this.http.delete<void>(`${this.setUrl}${setId}/card/${cardId}`)
   }
+
+  getSetPrice(cardIds: string[]): Observable<number> {
+    return this.http.post<number>(`${this.setUrl}price`, cardIds)
+  }
 }

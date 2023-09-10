@@ -5,9 +5,7 @@
           style="display: flex; align-self: stretch">
     <nz-card class="w-70" style="display: flex; align-items: center;" *ngIf="selectedSet">
       <div style="display: flex; align-items: center;">
-        <div>
-          <img alt="card" [nzSrc]="selectedSet.icon_svg_uri || '/'" nz-image style="height: 40px">
-        </div>
+        <div><img alt="card" [nzSrc]="selectedSet.icon_svg_uri || '/'" nz-image style="height: 40px"></div>
         <div style="margin-left: 10px;">
           <div>{{ selectedSet.name }}</div>
           <div>{{ selectedSet.card_count }} cards</div>

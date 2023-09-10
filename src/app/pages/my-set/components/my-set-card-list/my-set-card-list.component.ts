@@ -4,7 +4,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {CardProvider} from "../../../../app-core/providers/card.provider";
 import {SetService} from "../../../set/set.service";
 import {ByIdCommand} from "../../../card/model/command/by-id.command";
-import {switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {CardDbModel} from "../../../card/model/dto/card-db.model";
 import {SetProvider} from "../../../../app-core/providers/set.provider";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -23,6 +23,8 @@ export class MySetCardListComponent implements OnInit {
   currentPageIndex = 1;
   pageSize = 10;
   totalItems = 0;
+  cardIds: string[] = [];
+  totalPrice!: number;
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider,
               private setService: SetService,
@@ -45,13 +47,15 @@ export class MySetCardListComponent implements OnInit {
         const command: ByIdCommand = new ByIdCommand();
         command.id = params.get('id');
 
-        return this.cardProvider.getCardsBySetIdPaginated(command, pageIndex, pageSize); // Modified call
+        return this.cardProvider.getCardsBySetIdPaginated(command, pageIndex, pageSize);
       })
     ).subscribe({
       next: (res: any) => {
         this.setCardList = res.content;
         this.totalItems = res.totalElements;
         this.selectedSet = this.setService.getSelectedSet();
+        this.cardIds = this.setCardList.map(card => card.id);
+        this.totalPrice = this.getSetPrice()
         this.showTable = true;
         this.showTableLoading = false;
       },
@@ -59,6 +63,21 @@ export class MySetCardListComponent implements OnInit {
         console.error('Error retrieving cards:', error);
       }
     });
+  }
+
+  getSetPrice(): number {
+    this.totalPrice = 0;
+    if (this.cardIds.length > 0) {
+      this.setProvider.getSetPrice(this.cardIds).subscribe({
+        next: (price: number) => {
+          this.totalPrice = price;
+        },
+        error: (error) => {
+          console.error('Error getting set price:', error);
+        }
+      });
+    }
+    return this.totalPrice
   }
 
   onPageIndexChange(pageIndex: number): void {
