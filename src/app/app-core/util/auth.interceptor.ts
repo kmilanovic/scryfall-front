@@ -22,6 +22,8 @@ export class AuthInterceptor implements HttpInterceptor {
           console.log(error.status)
           localStorage.removeItem('token');
           this.router.navigate(['/login']);
+        } else {
+          return throwError(() => error);
         }
         return throwError(() => error);
       })

@@ -46,8 +46,11 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.log(error);
-          this.error = 'An error has happened while signing in.';
+          if (error.status === 401) {
+            this.error = 'Bad credentials. Please use a different email address.';
+          } else {
+            this.error = 'An error has occurred while registering.';
+          }
         }
       });
   }

@@ -39,7 +39,6 @@ export class MySetCardListComponent implements OnInit {
       this.currentPageIndex = pageIndex;
       this.getCardsBySetId(pageIndex, this.pageSize);
     });
-
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const command: ByIdCommand = new ByIdCommand();
@@ -82,21 +81,6 @@ export class MySetCardListComponent implements OnInit {
         console.error('Error retrieving cards:', error);
       }
     });
-  }
-
-  getSetPrice(setId: number): number {
-    this.totalPrice = 0;
-    if (this.cardIds.length > 0) {
-      this.setProvider.getSetPrice(setId).subscribe({
-        next: (price: number) => {
-          this.totalPrice = price;
-        },
-        error: (error) => {
-          console.error('Error getting set price:', error);
-        }
-      });
-    }
-    return this.totalPrice
   }
 
   onPageIndexChange(pageIndex: number): void {

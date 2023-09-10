@@ -31,14 +31,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authProvider
-      .register(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value).subscribe({
+    this.authProvider.register(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value)
+      .subscribe({
         next: () => {
           this.router.navigate(['/login']);
         },
         error: (error) => {
-          console.log(error);
-          this.error = 'An error has happened while registering.';
+          if (error.status === 409) {
+            this.error = 'Email already exists. Please use a different email address.';
+          } else {
+            this.error = 'An error has occurred while registering.';
+          }
         }
       });
   }
