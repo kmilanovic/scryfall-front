@@ -25,6 +25,7 @@ export class MySetCardListComponent implements OnInit {
   totalItems = 0;
   cardIds: string[] = [];
   totalPrice!: number;
+  setId: number = 0;
   constructor(private route: ActivatedRoute,
               private cardProvider: CardProvider,
               private setService: SetService,
@@ -46,6 +47,9 @@ export class MySetCardListComponent implements OnInit {
       switchMap((params: ParamMap) => {
         const command: ByIdCommand = new ByIdCommand();
         command.id = params.get('id');
+        if (command.id != null) {
+          this.setId = parseInt(command.id, 10);
+        }
 
         return this.cardProvider.getCardsBySetIdPaginated(command, pageIndex, pageSize);
       })
@@ -55,7 +59,7 @@ export class MySetCardListComponent implements OnInit {
         this.totalItems = res.totalElements;
         this.selectedSet = this.setService.getSelectedSet();
         this.cardIds = this.setCardList.map(card => card.id);
-        this.totalPrice = this.getSetPrice()
+        this.totalPrice = this.getSetPrice(this.setId)
         this.showTable = true;
         this.showTableLoading = false;
       },
@@ -65,10 +69,10 @@ export class MySetCardListComponent implements OnInit {
     });
   }
 
-  getSetPrice(): number {
+  getSetPrice(setId: number): number {
     this.totalPrice = 0;
     if (this.cardIds.length > 0) {
-      this.setProvider.getSetPrice(this.cardIds).subscribe({
+      this.setProvider.getSetPrice(setId).subscribe({
         next: (price: number) => {
           this.totalPrice = price;
         },
