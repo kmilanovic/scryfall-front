@@ -11,6 +11,7 @@ import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NzImageModule } from "ng-zorro-antd/image";
+import {NzMessageModule} from "ng-zorro-antd/message";
 
 const COMPONENTS = [
   LoginComponent
@@ -31,6 +32,7 @@ const COMPONENTS = [
     NzButtonModule,
     ReactiveFormsModule,
     NzImageModule,
+    NzMessageModule
   ]
 })
 export class LoginModule {

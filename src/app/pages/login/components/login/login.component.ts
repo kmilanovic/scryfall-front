@@ -4,6 +4,7 @@ import { AuthProvider } from "../../../../app-core/providers/auth.provider";
 import { Router } from "@angular/router";
 import { UserModel } from "../../model/dto/user.model";
 import {tap} from "rxjs";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authProvider: AuthProvider,
     private router: Router,
+    private message: NzMessageService
   ) {
   }
 
@@ -41,6 +43,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
           localStorage.setItem('email', response.email);
           this.router.navigate(['/card-list']);
+
+          this.message.success('Login successful!');
         })
       )
       .subscribe({

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserModel} from "../../../login/model/dto/user.model";
 import {AuthProvider} from "../../../../app-core/providers/auth.provider";
 import {Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private authProvider: AuthProvider,
     private router: Router,
+    private message: NzMessageService
   ) {
   }
 
@@ -34,6 +36,7 @@ export class RegisterComponent implements OnInit {
     this.authProvider.register(this.registerForm.get('email')?.value, this.registerForm.get('password')?.value)
       .subscribe({
         next: () => {
+          this.message.success('Register successful!');
           this.router.navigate(['/login']);
         },
         error: (error) => {

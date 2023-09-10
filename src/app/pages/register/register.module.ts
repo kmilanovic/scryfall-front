@@ -8,6 +8,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzMessageModule} from "ng-zorro-antd/message";
 
 const COMPONENTS = [
   RegisterComponent
@@ -24,7 +25,8 @@ const COMPONENTS = [
     NzInputModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzButtonModule
+    NzButtonModule,
+    NzMessageModule
   ]
 })
 export class RegisterModule { }
