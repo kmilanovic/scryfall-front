@@ -39,6 +39,25 @@ export class MySetCardListComponent implements OnInit {
       this.currentPageIndex = pageIndex;
       this.getCardsBySetId(pageIndex, this.pageSize);
     });
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        const command: ByIdCommand = new ByIdCommand();
+        command.id = params.get('id');
+        if (command.id != null) {
+          this.setId = parseInt(command.id, 10);
+        }
+
+        return this.setProvider.getSetPrice(this.setId);
+      })
+    ).subscribe({
+      next: (price: number) => {
+        this.totalPrice = price;
+      },
+      error: (error) => {
+        console.error('Error getting set price:', error);
+      }
+    });
   }
 
   getCardsBySetId(pageIndex: number, pageSize: number) {
@@ -47,9 +66,6 @@ export class MySetCardListComponent implements OnInit {
       switchMap((params: ParamMap) => {
         const command: ByIdCommand = new ByIdCommand();
         command.id = params.get('id');
-        if (command.id != null) {
-          this.setId = parseInt(command.id, 10);
-        }
 
         return this.cardProvider.getCardsBySetIdPaginated(command, pageIndex, pageSize);
       })
@@ -59,7 +75,6 @@ export class MySetCardListComponent implements OnInit {
         this.totalItems = res.totalElements;
         this.selectedSet = this.setService.getSelectedSet();
         this.cardIds = this.setCardList.map(card => card.id);
-        this.totalPrice = this.getSetPrice(this.setId)
         this.showTable = true;
         this.showTableLoading = false;
       },
